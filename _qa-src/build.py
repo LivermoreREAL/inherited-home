@@ -14,7 +14,7 @@ ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
 BY = {p["slug"]: p for p in PAGES}
 esc = lambda s: html.escape(s, quote=True)
 
-from site_schema import SITE_NAME, PERSON, ICON_TAGS  # shared with the home page build
+from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST  # shared with the home page build
 
 def head(title, desc, url, rel, ogtype, ld, noindex=False):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
@@ -66,6 +66,7 @@ def foot(rel):
   <div class="sg sf">See you around town.</div>
   Sam Yusufi, Realtor&reg; &middot; Associate Broker &middot; Certified Probate &amp; Trust Specialist &middot; DRE# 02020587<br>
   Legacy Real Estate &amp; Associates &middot; <a href="tel:+19254258929">925.425.8929</a> &middot; <a href="mailto:sam@samyusufi.com">sam@samyusufi.com</a><br>
+  <span class="area">{SERVING}</span><br>
   <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
   <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing.</p>
@@ -158,7 +159,7 @@ def build_home():
       <li>I work alongside your attorney and CPA, not around them.</li>
       <li>I treat the home as your family's loss to move through with care, not a transaction to rush.</li>
     </ul>
-    <p>I serve families across the East Bay, including Alameda and Contra Costa Counties, in English, Farsi, Dari, and Hindi.</p>
+    <p>I serve families in {CITY_LIST}, across Alameda and Contra Costa Counties, in English, Farsi, Dari, and Hindi.</p>
   </section>
   <p class="src">More free information: <a href="https://selfhelp.courts.ca.gov/probate">California Courts self-help: probate</a></p>
 </main>
@@ -191,7 +192,7 @@ def build_meta():
     open(os.path.join(SITE_ROOT, "robots.txt"), "w").write(rb)
     lt = f"""# What Happens to the House?
 
-> Answers for California families with an inherited home, whether it's in probate or a trust: who's in charge, what to do first, how probate sales and overbids work, trust sales, Prop 19, stepped-up basis, and selling. Written by Sam Yusufi, Realtor(R), Associate Broker and Certified Probate & Trust Specialist (CPTS), Legacy Real Estate & Associates, California DRE# 02020587. Serving the East Bay (Alameda and Contra Costa Counties). General information about California law, current as of {UPDATED}; not legal or tax advice.
+> Answers for California families with an inherited home, whether it's in probate or a trust: who's in charge, what to do first, how probate sales and overbids work, trust sales, Prop 19, stepped-up basis, and selling. Written by Sam Yusufi, Realtor(R), Associate Broker and Certified Probate & Trust Specialist (CPTS), Legacy Real Estate & Associates, California DRE# 02020587. Serving the East Bay: {CITY_LIST}, across Alameda and Contra Costa Counties, California. General information about California law, current as of {UPDATED}; not legal or tax advice.
 
 Contact: Sam Yusufi, 925.425.8929 (call or text), sam@samyusufi.com, https://samyusufi.com
 Free printable guide (15 pages): {SITE}
