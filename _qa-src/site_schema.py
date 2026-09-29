@@ -41,9 +41,15 @@ gtag('js',new Date());gtag('config','{GA_ID}');
 document.addEventListener('click',function(e){{
   var a=e.target.closest&&e.target.closest('a');if(!a)return;
   var h=a.getAttribute('href')||'',p={{link_location:location.pathname}};
-  if(h.indexOf('sms:')===0)gtag('event','text_me',p);
-  else if(h.indexOf('tel:')===0)gtag('event','call_click',p);
-  else if(h.indexOf('mailto:')===0)gtag('event','email_click',p);
+  var n=h.indexOf('sms:')===0?'text_me':h.indexOf('tel:')===0?'call_click':h.indexOf('mailto:')===0?'email_click':'';
+  if(n){{
+    // Texting, calling, and email apps take over the screen right away, which can cut off the
+    // message to Google. Send it first (as a beacon), then open the app a moment later.
+    e.preventDefault();
+    var done=false,go=function(){{if(!done){{done=true;location.href=h;}}}};
+    gtag('event',n,{{link_location:p.link_location,transport_type:'beacon',event_callback:go,event_timeout:600}});
+    setTimeout(go,700);
+  }}
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
 }});
 </script>"""
