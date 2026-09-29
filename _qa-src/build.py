@@ -14,20 +14,7 @@ ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
 BY = {p["slug"]: p for p in PAGES}
 esc = lambda s: html.escape(s, quote=True)
 
-PERSON = {
-  "@type": "Person", "@id": BASE + "#sam", "name": "Sam Yusufi",
-  "jobTitle": "Realtor, Associate Broker", "url": "https://samyusufi.com",
-  "image": BASE + "assets/headshot.jpg", "telephone": "+1-925-425-8929", "email": "sam@samyusufi.com",
-  "worksFor": {"@type": "RealEstateAgent", "name": "Legacy Real Estate & Associates"},
-  "hasCredential": [
-    {"@type": "EducationalOccupationalCredential", "name": "Certified Probate & Trust Specialist (CPTS)", "credentialCategory": "certification"},
-    {"@type": "EducationalOccupationalCredential", "name": "California Real Estate Broker License", "identifier": "DRE# 02020587", "credentialCategory": "license",
-     "recognizedBy": {"@type": "GovernmentOrganization", "name": "California Department of Real Estate"}}],
-  "areaServed": [{"@type": "AdministrativeArea", "name": "Alameda County, California"},
-                 {"@type": "AdministrativeArea", "name": "Contra Costa County, California"}],
-  "knowsLanguage": ["English", "Persian", "Hindi"],
-  "sameAs": ["https://www.facebook.com/samyusufibroker/", "https://www.linkedin.com/in/yusufi/", "https://www.instagram.com/samyusufi7/"],
-}
+from site_schema import SITE_NAME, PERSON, ICON_TAGS  # shared with the home page build
 
 def head(title, desc, url, rel, ogtype, ld, noindex=False):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
@@ -42,7 +29,7 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False):
 <meta name="author" content="Sam Yusufi, Certified Probate &amp; Trust Specialist">
 <meta name="theme-color" content="#001d49">
 <meta property="og:type" content="{ogtype}">
-<meta property="og:site_name" content="What Happens to the House?">
+<meta property="og:site_name" content="{esc(SITE_NAME)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
@@ -50,7 +37,7 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="{rel}assets/favicon.png">
+{ICON_TAGS}
 <link rel="apple-touch-icon" href="{rel}assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,8 +85,8 @@ def build_page(p):
     graph = [
       {"@type": "Article", "headline": p["h1"], "description": p["meta"], "url": url, "mainEntityOfPage": url,
        "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO, "inLanguage": "en-US",
-       "author": {"@id": BASE + "#sam"}, "publisher": {"@id": BASE + "#sam"}, "image": BASE + "assets/og-image.jpg",
-       "isPartOf": {"@type": "WebSite", "name": "What Happens to the House?", "url": BASE}},
+       "author": {"@id": SITE + "#sam"}, "publisher": {"@id": SITE + "#sam"}, "image": BASE + "assets/og-image.jpg",
+       "isPartOf": {"@id": SITE + "#website"}},
       PERSON,
       {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "What Happens to the House?", "item": BASE},
@@ -138,8 +125,8 @@ def build_home():
         groups += f'    <div class="grp"><h2 class="sf">{esc(name)}</h2>\n{links}\n    </div>\n'
     desc = "Answers for California families with an inherited home: probate or trust, who's in charge, overbids, Prop 19, capital gains, and selling. By Sam Yusufi, Certified Probate & Trust Specialist."
     graph = [
-      {"@type": "WebSite", "@id": BASE + "#site", "name": "What Happens to the House?", "url": BASE, "inLanguage": "en-US",
-       "description": desc, "publisher": {"@id": BASE + "#sam"}},
+      {"@type": "CollectionPage", "@id": BASE + "#page", "name": "What Happens to the House?", "url": BASE, "inLanguage": "en-US",
+       "description": desc, "isPartOf": {"@id": SITE + "#website"}, "author": {"@id": SITE + "#sam"}},
       PERSON,
       {"@type": "ItemList", "name": "Questions answered", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "url": BASE + p["slug"] + "/", "name": p["h1"]} for i, p in enumerate(PAGES)]},
