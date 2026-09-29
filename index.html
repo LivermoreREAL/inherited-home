@@ -3,6 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CXF6CNWM21"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-CXF6CNWM21');
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a');if(!a)return;
+  var h=a.getAttribute('href')||'',p={link_location:location.pathname};
+  if(h.indexOf('sms:')===0)gtag('event','text_me',p);
+  else if(h.indexOf('tel:')===0)gtag('event','call_click',p);
+  else if(h.indexOf('mailto:')===0)gtag('event','email_click',p);
+  else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
+});
+</script>
 <title>Inherited a Home in the East Bay? Free Guide | Sam Yusufi, CPTS</title>
 <meta name="description" content="Who's in charge, what to do first, and what comes next for California families with an inherited home in probate or a trust. A free guide from Sam Yusufi, Certified Probate &amp; Trust Specialist.">
 <meta name="theme-color" content="#001d49">
@@ -497,7 +510,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg>
       Equal Housing Opportunity
     </span>
-    <p class="fine">I&#39;m a real estate broker, not an attorney or tax advisor. Nothing on this page is legal or tax advice. If your property is currently listed for sale, this is not intended as a solicitation of that listing.</p>
+    <p class="fine">I&#39;m a real estate broker, not an attorney or tax advisor. Nothing on this page is legal or tax advice. If your property is currently listed for sale, this is not intended as a solicitation of that listing. This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me.</p>
   </footer>
 
 </main>
@@ -517,6 +530,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
       "",
       "Message: "+(d.get("message")||"")
     ].join("\r\n");
+    if(window.gtag)gtag("event","generate_lead",{lead_source:"guide_form",role:d.get("role"),stage:d.get("stage")});
     location.href="mailto:sam@samyusufi.com?subject="+encodeURIComponent("Inherited home guide request: "+d.get("name"))+"&body="+encodeURIComponent(body);
     document.getElementById("fb").hidden=true;
     document.getElementById("db").hidden=false;

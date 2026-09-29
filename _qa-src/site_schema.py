@@ -28,3 +28,23 @@ PERSON = {
 }
 
 ICON_TAGS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">'
+
+# Google Analytics 4 (property "youreastbay.com" in the "Sam Yusufi Real Estate" account).
+# Counts page views, plus these events: generate_lead (guide form sent), text_me (sms taps),
+# call_click, email_click, and guide_cta_click (a "Free guide" button that leads to the form).
+# No names, emails, phone numbers, or addresses are ever sent to Google.
+GA_ID = "G-CXF6CNWM21"
+ANALYTICS = f"""<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+gtag('js',new Date());gtag('config','{GA_ID}');
+document.addEventListener('click',function(e){{
+  var a=e.target.closest&&e.target.closest('a');if(!a)return;
+  var h=a.getAttribute('href')||'',p={{link_location:location.pathname}};
+  if(h.indexOf('sms:')===0)gtag('event','text_me',p);
+  else if(h.indexOf('tel:')===0)gtag('event','call_click',p);
+  else if(h.indexOf('mailto:')===0)gtag('event','email_click',p);
+  else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
+}});
+</script>"""
+PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me."

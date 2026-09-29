@@ -14,7 +14,7 @@ ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
 BY = {p["slug"]: p for p in PAGES}
 esc = lambda s: html.escape(s, quote=True)
 
-from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST  # shared with the home page build
+from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE  # shared with the home page build
 
 def head(title, desc, url, rel, ogtype, ld, noindex=False):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
@@ -23,6 +23,7 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+{ANALYTICS}
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 {index_tag}
@@ -69,7 +70,7 @@ def foot(rel):
   <span class="area">{SERVING}</span><br>
   <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
-  <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing.</p>
+  <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. {esc(PRIVACY_NOTE)}</p>
 </footer>
 </body>
 </html>

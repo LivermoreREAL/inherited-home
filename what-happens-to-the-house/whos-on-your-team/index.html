@@ -3,6 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CXF6CNWM21"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-CXF6CNWM21');
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a');if(!a)return;
+  var h=a.getAttribute('href')||'',p={link_location:location.pathname};
+  if(h.indexOf('sms:')===0)gtag('event','text_me',p);
+  else if(h.indexOf('tel:')===0)gtag('event','call_click',p);
+  else if(h.indexOf('mailto:')===0)gtag('event','email_click',p);
+  else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
+});
+</script>
 <title>Who do you need on your team to settle an inherited house? | What Happens to the House?</title>
 <meta name="description" content="The professionals who help settle an inherited California house: estate attorney, CPA, title and escrow, insurance agent, real estate agent, and more, and what each handles.">
 <link rel="canonical" href="https://youreastbay.com/what-happens-to-the-house/whos-on-your-team/">
@@ -249,7 +262,7 @@
   <span class="area">Serving families in Livermore, Pleasanton, Dublin, San Ramon, Danville, Fremont, Union City, Newark, and San Leandro, across Alameda and Contra Costa Counties.</span><br>
   <a href="../">Guide home</a> &middot; <a href="/">Free guide</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
-  <p class="fine">General educational information about California law, current as of September 2026. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing.</p>
+  <p class="fine">General educational information about California law, current as of September 2026. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me.</p>
 </footer>
 </body>
 </html>
