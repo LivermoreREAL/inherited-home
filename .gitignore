@@ -1,2 +1,4 @@
 _guide-src/
 .DS_Store
+_qa-src/og-check.png
+__pycache__/
