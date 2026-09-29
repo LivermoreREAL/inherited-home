@@ -130,7 +130,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
         <div><label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First &amp; last" autocomplete="name" required></div>
         <div><label for="f-email">Email</label><input id="f-email" type="email" name="email" placeholder="you@email.com" autocomplete="email" required></div>
         <div><label for="f-phone">Mobile</label><input id="f-phone" type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" pattern="[0-9\s\(\)\+\.\-]{10,}" title="Please enter your 10-digit mobile number." required></div>
-        <div><label for="f-city">City where the home is <span class="opt">(optional)</span></label><input id="f-city" name="city" placeholder="Livermore" autocomplete="address-level2"></div>
+        <div><label for="f-addr">Property address <span class="opt">(optional)</span></label><input id="f-addr" name="property_address" placeholder="123 Main St, Livermore" autocomplete="street-address"></div>
         <div><label for="f-role">Your role</label>
           <select id="f-role" name="role" required>
             <option value="" disabled selected>Choose one</option>
@@ -205,7 +205,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
       "Name: "+d.get("name"),
       "Email: "+d.get("email"),
       "Phone: "+d.get("phone"),
-      "City: "+(d.get("city")||""),
+      "Property address: "+(d.get("property_address")||""),
       "Role: "+d.get("role"),
       "Where things are: "+d.get("stage"),
       "",
