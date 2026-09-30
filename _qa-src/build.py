@@ -16,7 +16,7 @@ esc = lambda s: html.escape(s, quote=True)
 
 from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE  # shared with the home page build
 
-def head(title, desc, url, rel, ogtype, ld, noindex=False):
+def head(title, desc, url, rel, ogtype, ld, noindex=False, og=None):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{BASE}assets/og-image.jpg">
+<meta property="og:image" content="{og or BASE + 'assets/og-image.jpg'}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -149,6 +149,9 @@ def build_home():
   </div>
   <p class="lede">Someone you love has passed, and a house is part of what they left behind. Start with the question you're facing today. Each answer takes a few minutes to read.</p>
   <div class="groups">
+    <div class="grp"><h2 class="sf">Free tool</h2>
+      <a href="/prop19-calculator/"><span>Prop 19 Calculator: what happens to the property tax bill?</span></a>
+    </div>
 {groups}  </div>
 {cta(rel)}
   <section class="hp">
@@ -184,7 +187,7 @@ def build_404():
     open(os.path.join(SITE_ROOT, "404.html"), "w").write(out)
 
 def build_meta():
-    urls = [SITE, BASE] + [BASE + p["slug"] + "/" for p in PAGES]
+    urls = [SITE, BASE, SITE + "prop19-calculator/"] + [BASE + p["slug"] + "/" for p in PAGES]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sm += "".join(f"  <url><loc>{u}</loc><lastmod>{UPDATED_ISO}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(os.path.join(SITE_ROOT, "sitemap.xml"), "w").write(sm)
@@ -198,6 +201,11 @@ def build_meta():
 Contact: Sam Yusufi, 925.425.8929 (call or text), sam@samyusufi.com, https://samyusufi.com
 Free printable guide (15 pages): {SITE}
 All questions: {BASE}
+Prop 19 calculator (inherited homes and 55+ moves, with 2025-26 tax rates for Alameda, Contra Costa, and San Joaquin counties): {SITE}prop19-calculator/
+
+## Free tool
+
+- [Prop 19 Calculator]({SITE}prop19-calculator/): Estimates California property taxes under Proposition 19 for an inherited parent's home (parent-child exclusion, $1,044,586 limit for transfers Feb 16, 2025 to Feb 15, 2027) and for homeowners 55 or older moving their taxable value to a replacement home (100%, 105%, 110% rules). Includes typical 2025-26 tax rates by city from each county's official rate book.
 
 """
     for name, slugs in GROUPS:
@@ -207,4 +215,6 @@ All questions: {BASE}
 for p in PAGES:
     build_page(p)
 build_home(); build_404(); build_meta()
-print(f"built {len(PAGES)} pages + home, 404.html, sitemap.xml, robots.txt, llms.txt")
+from prop19 import build_prop19
+build_prop19(globals())
+print(f"built {len(PAGES)} pages + home, prop19 calculator, 404.html, sitemap.xml, robots.txt, llms.txt")

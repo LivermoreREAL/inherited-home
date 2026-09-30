@@ -223,7 +223,7 @@ body="""
 <li>How will the sale be reported, and by whom?</li>
 <li>Which costs of preparing and selling the home can reduce any gain?</li>
 </ul>
-<p>If anyone in the family is thinking about keeping the house instead, ask about Proposition 19 too. It can change the property tax bill.</p>
+<p>If anyone in the family is thinking about keeping the house instead, ask about Proposition 19 too. It can change the property tax bill. You can estimate it with the free <a href="/prop19-calculator/">Prop 19 Calculator</a>.</p>
 """,
 related=["prop-19-inherited-home","sell-inherited-house-as-is-or-fix-up","whos-on-your-team"]),
 
@@ -232,17 +232,18 @@ slug="prop-19-inherited-home",
 topic="Taxes",
 h1="Does Prop 19 apply to an inherited home in California?",
 meta="Under Prop 19, a child keeps a parent's low property tax base only by making the inherited home their primary residence within a year, up to a value limit.",
-short="Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to a certain value. Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.",
+short="Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to the parent's taxable value plus $1,044,586 (for transfers from February 16, 2025 to February 15, 2027). Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.",
 body="""
 <h2>The common assumption</h2>
 <p>"I inherited my parents' house, so I keep their low property tax bill." Since February 2021, that's often not true.</p>
 <h2>How it works</h2>
 <ul class="dots">
-<li>If you move in and make it your primary residence within one year, you can keep your parent's tax base, up to a set value limit.</li>
+<li>If you move in and make it your primary residence within one year, you can keep your parent's tax base, up to your parent's taxable value plus $1,044,586. Any value above that is added.</li>
 <li>If you don't move in, for example if you rent it out or keep it empty, the home is reassessed at current market value.</li>
 </ul>
 <div class="box"><p>Say your parents' home is assessed at $150,000 for tax purposes, and it's worth $1,100,000 today. If it's reassessed, property taxes are based on about $1,100,000 instead, roughly seven times the old amount.</p></div>
 <p class="why">And here's why it matters: if anyone in the family is thinking about keeping the house, talk to a CPA about Prop 19 before you decide.</p>
+<div class="box"><p><b>Run your own numbers:</b> the free <a href="/prop19-calculator/">Prop 19 Calculator</a> shows the property tax bill with and without a child moving in, using 2025-26 rates for Alameda, Contra Costa, and San Joaquin counties.</p></div>
 """,
 related=["inherited-house-capital-gains","siblings-disagree-inherited-house","common-mistakes-inherited-house"]),
 

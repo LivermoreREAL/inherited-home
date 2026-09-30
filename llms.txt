@@ -5,6 +5,11 @@
 Contact: Sam Yusufi, 925.425.8929 (call or text), sam@samyusufi.com, https://samyusufi.com
 Free printable guide (15 pages): https://youreastbay.com/
 All questions: https://youreastbay.com/what-happens-to-the-house/
+Prop 19 calculator (inherited homes and 55+ moves, with 2025-26 tax rates for Alameda, Contra Costa, and San Joaquin counties): https://youreastbay.com/prop19-calculator/
+
+## Free tool
+
+- [Prop 19 Calculator](https://youreastbay.com/prop19-calculator/): Estimates California property taxes under Proposition 19 for an inherited parent's home (parent-child exclusion, $1,044,586 limit for transfers Feb 16, 2025 to Feb 15, 2027) and for homeowners 55 or older moving their taxable value to a replacement home (100%, 105%, 110% rules). Includes typical 2025-26 tax rates by city from each county's official rate book.
 
 ## Getting started
 
@@ -32,7 +37,7 @@ All questions: https://youreastbay.com/what-happens-to-the-house/
 ## Taxes
 
 - [Do you pay capital gains tax when you sell an inherited house?](https://youreastbay.com/what-happens-to-the-house/inherited-house-capital-gains/): Often little or none, if you sell soon after inheriting. Inherited property usually gets a stepped-up basis, meaning its value for tax purposes resets to what it was worth on the date of death. Capital gains are then figured from that value, not from what the original owner paid. Confirm the details with a CPA.
-- [Does Prop 19 apply to an inherited home in California?](https://youreastbay.com/what-happens-to-the-house/prop-19-inherited-home/): Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to a certain value. Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.
+- [Does Prop 19 apply to an inherited home in California?](https://youreastbay.com/what-happens-to-the-house/prop-19-inherited-home/): Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to the parent's taxable value plus $1,044,586 (for transfers from February 16, 2025 to February 15, 2027). Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.
 
 ## Family
 
