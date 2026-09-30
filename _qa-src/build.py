@@ -3,6 +3,7 @@
 # Run from the repo root: python3 _qa-src/build.py
 import html, json, os
 from content import PAGES, GROUPS
+import prop19 as P19
 
 SITE = "https://youreastbay.com/"
 BASE = SITE + "what-happens-to-the-house/"
@@ -201,11 +202,11 @@ def build_meta():
 Contact: Sam Yusufi, 925.425.8929 (call or text), sam@samyusufi.com, https://samyusufi.com
 Free printable guide (15 pages): {SITE}
 All questions: {BASE}
-Prop 19 calculator (inherited homes and 55+ moves, with 2025-26 tax rates for Alameda, Contra Costa, and San Joaquin counties): {SITE}prop19-calculator/
+Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rates for Alameda, Contra Costa, and San Joaquin counties): {SITE}prop19-calculator/
 
 ## Free tool
 
-- [Prop 19 Calculator]({SITE}prop19-calculator/): Estimates California property taxes under Proposition 19 for an inherited parent's home (parent-child exclusion, $1,044,586 limit for transfers Feb 16, 2025 to Feb 15, 2027) and for homeowners 55 or older moving their taxable value to a replacement home (100%, 105%, 110% rules). Includes typical 2025-26 tax rates by city from each county's official rate book.
+- [Prop 19 Calculator]({SITE}prop19-calculator/): Estimates California property taxes under Proposition 19 for an inherited parent's home (parent-child exclusion, ${P19.CUR_LIMIT:,} limit for transfers {P19.CUR_PERIOD}) and for homeowners 55 or older moving their taxable value to a replacement home (100%, 105%, 110% rules). Includes typical {P19.RATE_YEAR} tax rates by city from each county's official rate book.
 
 """
     for name, slugs in GROUPS:

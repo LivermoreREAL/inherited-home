@@ -2,6 +2,8 @@
 # Each page: slug, topic, h1, meta (search description), short (the quotable short answer),
 # body (HTML), related (list of slugs). Written from the approved guide v2 (Sept 2026).
 
+from prop19 import CUR_LIMIT, CUR_PERIOD_LONG   # current Prop 19 parent-child limit (see _qa-src/UPDATING.md)
+
 PAGES = [
 dict(
 slug="inherited-house-first-30-days",
@@ -232,13 +234,13 @@ slug="prop-19-inherited-home",
 topic="Taxes",
 h1="Does Prop 19 apply to an inherited home in California?",
 meta="Under Prop 19, a child keeps a parent's low property tax base only by making the inherited home their primary residence within a year, up to a value limit.",
-short="Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to the parent's taxable value plus $1,044,586 (for transfers from February 16, 2025 to February 15, 2027). Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.",
-body="""
+short=f"Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to the parent's taxable value plus ${CUR_LIMIT:,} (for transfers from {CUR_PERIOD_LONG}). Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.",
+body=f"""
 <h2>The common assumption</h2>
 <p>"I inherited my parents' house, so I keep their low property tax bill." Since February 2021, that's often not true.</p>
 <h2>How it works</h2>
 <ul class="dots">
-<li>If you move in and make it your primary residence within one year, you can keep your parent's tax base, up to your parent's taxable value plus $1,044,586. Any value above that is added.</li>
+<li>If you move in and make it your primary residence within one year, you can keep your parent's tax base, up to your parent's taxable value plus ${CUR_LIMIT:,}. Any value above that is added.</li>
 <li>If you don't move in, for example if you rent it out or keep it empty, the home is reassessed at current market value.</li>
 </ul>
 <div class="box"><p>Say your parents' home is assessed at $150,000 for tax purposes, and it's worth $1,100,000 today. If it's reassessed, property taxes are based on about $1,100,000 instead, roughly seven times the old amount.</p></div>

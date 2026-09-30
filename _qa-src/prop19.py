@@ -1,18 +1,28 @@
 # Builds the Prop 19 calculator page at /prop19-calculator/ (plus the short link /prop19/).
 # Called from build.py with that module's globals, so it shares the site header, footer, and analytics.
 # Rules: California State Board of Equalization, https://www.boe.ca.gov/prop19/ (checked Sept 2026).
-# Rates: each county's official 2025-26 rate book (see RATE_SOURCES). Update both yearly.
+# Rates: each county's official rate book (see RATE_SOURCES).
+# YEARLY UPDATES: see _qa-src/UPDATING.md. Everything that changes lives in the settings block below;
+# the page text, FAQ, structured data, Q&A Prop 19 page, and llms.txt all read from it.
 import json, os
+
+# ---------- settings block: the only values that change year to year ----------
+CALC_UPDATED_ISO, CALC_UPDATED = "2026-09-29", "September 2026"   # shown on the calculator page
+RATE_YEAR = "2025-26"                                             # tax year of the rates in AREAS
 
 URL_PATH = "prop19-calculator/"
 SHORT_PATH = "prop19/"
 
-# Parent-child exclusion amount by date of transfer (BOE, adjusted every two years)
+# Parent-child exclusion amount by date of transfer (BOE, adjusted every two years). NEWEST FIRST.
+# To add a period: insert a new first row (key, "Mon D, YYYY to Mon D, YYYY", amount) and a matching SHORT_LABELS entry.
 LIMITS = [("2025", "Feb 16, 2025 to Feb 15, 2027", 1044586),
           ("2023", "Feb 16, 2023 to Feb 15, 2025", 1022600),
           ("2021", "Feb 16, 2021 to Feb 15, 2023", 1000000)]
 
-# Typical 2025-26 ad valorem rate (1% base + voter-approved bonds) for the main tax rate areas in each city.
+SHORT_LABELS = {"2025": "2/16/25 to 2/15/27", "2023": "2/16/23 to 2/15/25", "2021": "2/16/21 to 2/15/23"}
+
+# Typical ad valorem rate for RATE_YEAR (1% base + voter-approved bonds): median total rate of the city's tax rate areas.
+# Recompute with _qa-src/rates.py.
 AREAS = [
   ("Alameda County", [("Dublin", 1.238), ("Fremont", 1.174), ("Livermore", 1.133), ("Newark", 1.149),
                       ("Pleasanton", 1.169), ("San Leandro", 1.244), ("Union City", 1.262), ("Other Alameda County", 1.174)]),
@@ -27,18 +37,28 @@ RATE_SOURCES = [
   ("San Joaquin County Auditor-Controller, 2025-26 Property Tax Rates", "https://www.sjgov.org/docs/default-source/auditor-controller-documents/property-tax/assessed-values-and-tax-rates/2025-2026/2025-26-property-tax-rates.pdf"),
 ]
 BOE = "https://www.boe.ca.gov/prop19/"
+# ---------- end of settings block ----------
+
+CUR_KEY, CUR_PERIOD, CUR_LIMIT = LIMITS[0]
+RATES = {name: r for _, cities in AREAS for name, r in cities}
+_ADJ_START = CUR_PERIOD.split(" to ")[0]   # e.g. "Feb 16, 2025"
+_ADJ_END = CUR_PERIOD.split(" to ")[1]
+def _long(d):  # "Feb 16, 2025" -> "February 16, 2025"
+    return d.replace("Feb ", "February ")
+CUR_PERIOD_LONG = _long(_ADJ_START) + " to " + _long(_ADJ_END)
+CALC_YEAR = CALC_UPDATED_ISO[:4]
 
 FAQ = [
-  ("How much is the Prop 19 inheritance exclusion in 2026?",
-   "For transfers from February 16, 2025 to February 15, 2027, a child who moves into a parent's home can keep the parent's taxable value on up to $1,044,586 of added market value. The amount started at $1,000,000 in 2021 and is adjusted every two years."),
+  (f"How much is the Prop 19 inheritance exclusion in {CALC_YEAR}?",
+   f"For transfers from {CUR_PERIOD_LONG}, a child who moves into a parent's home can keep the parent's taxable value on up to ${CUR_LIMIT:,} of added market value. The amount started at $1,000,000 in 2021 and is adjusted every two years."),
   ("Do I keep my parent's property tax bill if I inherit the house?",
-   "Only if the home was your parent's primary residence, you make it your own primary residence within one year, and you file for the homeowners' exemption. Even then, if the home is worth more than your parent's taxable value plus $1,044,586, the amount above that is added to your assessed value."),
+   f"Only if the home was your parent's primary residence, you make it your own primary residence within one year, and you file for the homeowners' exemption. Even then, if the home is worth more than your parent's taxable value plus ${CUR_LIMIT:,}, the amount above that is added to your assessed value."),
   ("What happens if I inherit the house and rent it out or keep it empty?",
    "The home is reassessed at its current market value, the same as if it had been sold. For many East Bay families, that means a property tax bill several times higher than what the parent paid."),
   ("How does the Prop 19 transfer work for homeowners 55 or older?",
    "You can sell your primary home and move your taxable value to a replacement home anywhere in California, bought within two years before or after the sale, up to three times. If the new home costs more than your old home's sale price (with a 5% allowance in the first year after the sale and 10% in the second), the difference is added to your taxable value."),
   ("What property tax rate should I use?",
-   "Use the total rate on your property tax bill: the 1% base plus voter-approved bonds for your tax rate area. Typical 2025-26 rates are about 1.13% in Livermore, 1.17% in Pleasanton, 1.24% in Dublin, 1.08% in San Ramon and Danville, and 1.15% in Tracy. Fixed charges, parcel taxes, and Mello-Roos are billed separately."),
+   f"Use the total rate on your property tax bill: the 1% base plus voter-approved bonds for your tax rate area. Typical {RATE_YEAR} rates are about {RATES['Livermore']:.2f}% in Livermore, {RATES['Pleasanton']:.2f}% in Pleasanton, {RATES['Dublin']:.2f}% in Dublin, {RATES['San Ramon']:.2f}% in San Ramon and Danville, and {RATES['Tracy']:.2f}% in Tracy. Fixed charges, parcel taxes, and Mello-Roos are billed separately."),
   ("What do I need to file, and when?",
    "For an inherited home, file the homeowners' exemption within one year and form BOE-19-P (parent to child) or BOE-19-G (grandparent to grandchild) with the county assessor within three years, or before the home is sold, whichever comes first. For a move at 55 or older, file BOE-19-B within three years of buying the replacement home."),
 ]
@@ -47,7 +67,8 @@ def _money(n):
     return "${:,.0f}".format(n)
 
 def build_prop19(g):
-    SITE, BASE, UPDATED, UPDATED_ISO = g["SITE"], g["BASE"], g["UPDATED"], g["UPDATED_ISO"]
+    SITE, BASE = g["SITE"], g["BASE"]
+    UPDATED, UPDATED_ISO = CALC_UPDATED, CALC_UPDATED_ISO   # the calculator keeps its own date
     esc, head, cta, foot, byline, PERSON, SMS = g["esc"], g["head"], g["cta"], g["foot"], g["byline"], g["PERSON"], g["SMS"]
     url = SITE + URL_PATH
     rel = "/what-happens-to-the-house/"
@@ -66,32 +87,31 @@ def build_prop19(g):
         options += f'<optgroup label="{esc(county)}">' + "".join(
             f'<option value="{r}" data-county="{esc(county)}"{" selected" if name == DEFAULT_AREA else ""}>{esc(name)} (about {r:.2f}%)</option>' for name, r in cities) + "</optgroup>"
     options += '<optgroup label="Somewhere else"><option value="custom">Not listed? Enter my own rate</option></optgroup>'
-    short_label = {"2025": "2/16/25 to 2/15/27", "2023": "2/16/23 to 2/15/25", "2021": "2/16/21 to 2/15/23"}
-    limit_opts = "".join(f'<option value="{v}">{short_label[k]} ({_money(v)})</option>' for k, _, v in LIMITS) + '<option value="old">Before 2/16/2021 (older rules)</option>'
+    limit_opts = "".join(f'<option value="{v}">{SHORT_LABELS[k]} ({_money(v)})</option>' for k, _, v in LIMITS) + '<option value="old">Before 2/16/2021 (older rules)</option>'
     rate_rows = "".join(f"<tr><td>{esc(name)}</td><td>{esc(county.replace(' County',''))}</td><td>{r:.2f}%</td></tr>" for county, cities in AREAS for name, r in cities)
     sources = "".join(f'<li><a href="{u}">{esc(t)}</a></li>' for t, u in RATE_SOURCES)
     faq_html = "".join(f'<div><dt>{esc(q)}</dt><dd>{esc(a)}</dd></div>' for q, a in FAQ)
 
-    title = "Prop 19 Calculator (2026): Inherited Homes and 55+ Moves | Alameda, Contra Costa, San Joaquin"
+    title = f"Prop 19 Calculator ({CALC_YEAR}): Inherited Homes and 55+ Moves | Alameda, Contra Costa, San Joaquin"
     desc = ("Free Prop 19 property tax calculator for California. See what happens to the tax bill when you inherit a parent's home "
-            "(2026 limit: $1,044,586) or move at 55 or older. Uses 2025-26 rates for Alameda, Contra Costa, and San Joaquin counties.")
+            f"({CALC_YEAR} limit: ${CUR_LIMIT:,}) or move at 55 or older. Uses {RATE_YEAR} rates for Alameda, Contra Costa, and San Joaquin counties.")
     counties = [{"@type": "AdministrativeArea", "name": c + ", California"} for c, _ in AREAS]
     graph = [
       {"@type": "WebApplication", "@id": url + "#app", "name": "Prop 19 Calculator", "url": url,
        "applicationCategory": "FinanceApplication", "operatingSystem": "Any (runs in a web browser)", "browserRequirements": "Requires JavaScript",
        "isAccessibleForFree": True, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
        "description": "Estimates California property taxes under Proposition 19 for an inherited parent's home (parent-child exclusion) and for homeowners 55 or older moving their taxable value to a replacement home.",
-       "featureList": ["Parent-child exclusion with the $1,044,586 limit (2025-2027)", "Age 55+ base year value transfer with 100%, 105%, and 110% rules",
-                       "2025-26 tax rates by city for Alameda, Contra Costa, and San Joaquin counties", "Runs entirely in the browser; numbers are not sent anywhere"],
+       "featureList": [f"Parent-child exclusion with the ${CUR_LIMIT:,} limit ({_ADJ_START[-4:]}-{_ADJ_END[-4:]})", "Age 55+ base year value transfer with 100%, 105%, and 110% rules",
+                       f"{RATE_YEAR} tax rates by city for Alameda, Contra Costa, and San Joaquin counties", "Runs entirely in the browser; numbers are not sent anywhere"],
        "areaServed": counties, "author": {"@id": SITE + "#sam"}, "inLanguage": "en-US", "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO},
       {"@type": "WebPage", "@id": url + "#page", "url": url, "name": title, "description": desc, "isPartOf": {"@id": SITE + "#website"},
        "mainEntity": {"@id": url + "#app"}, "author": {"@id": SITE + "#sam"}, "datePublished": UPDATED_ISO, "dateModified": UPDATED_ISO,
        "primaryImageOfPage": BASE + "assets/og-prop19.jpg", "citation": [BOE] + [u for _, u in RATE_SOURCES]},
       PERSON,
       {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]},
-      {"@type": "Dataset", "name": "Typical 2025-26 property tax rates by city: Alameda, Contra Costa, and San Joaquin counties",
-       "description": "Typical total ad valorem property tax rate (1% base plus voter-approved bonds) for the main tax rate areas in each city, taken from each county's official 2025-26 rate book.",
-       "temporalCoverage": "2025/2026", "spatialCoverage": counties, "creator": {"@id": SITE + "#sam"}, "isBasedOn": [u for _, u in RATE_SOURCES],
+      {"@type": "Dataset", "name": f"Typical {RATE_YEAR} property tax rates by city: Alameda, Contra Costa, and San Joaquin counties",
+       "description": f"Typical total ad valorem property tax rate (1% base plus voter-approved bonds) for the main tax rate areas in each city, taken from each county's official {RATE_YEAR} rate book.",
+       "temporalCoverage": RATE_YEAR[:4] + "/20" + RATE_YEAR[5:], "spatialCoverage": counties, "creator": {"@id": SITE + "#sam"}, "isBasedOn": [u for _, u in RATE_SOURCES],
        "variableMeasured": "Property tax rate (percent of assessed value)", "url": url + "#rates", "license": "https://creativecommons.org/licenses/by/4.0/"},
       {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "What Happens to the House?", "item": BASE},
@@ -103,12 +123,12 @@ def build_prop19(g):
   <nav class="crumb"><a href="{rel}">Guide home</a> &rsaquo; Tools</nav>
   <h1 class="sf">Prop 19 Calculator</h1>
   <p class="lede">See what happens to the property tax bill when you inherit a parent's home, or when you move at 55 or older. Built for Alameda, Contra Costa, and San Joaquin counties.</p>
-  {byline(rel)}
-  <div class="short"><div class="k">Quick facts for 2026</div>
+  {byline(rel).replace(g['UPDATED_ISO'], UPDATED_ISO).replace(g['UPDATED'], UPDATED)}
+  <div class="short"><div class="k">Quick facts for {CALC_YEAR}</div>
     <ul class="dots">
       <li><b>Inheriting a parent's home:</b> a child keeps the parent's tax base only by moving in within one year, and only up to the parent's taxable value plus {_money(LIMITS[0][2])} (transfers {LIMITS[0][1]}).</li>
       <li><b>Moving at 55 or older:</b> you can take your tax base to a new home anywhere in California, bought within two years of the sale, up to three times.</li>
-      <li><b>Typical 2025-26 rates:</b> Livermore {rates['Livermore']:.2f}%, Pleasanton {rates['Pleasanton']:.2f}%, San Ramon {rates['San Ramon']:.2f}%, Tracy {rates['Tracy']:.2f}%.</li>
+      <li><b>Typical {RATE_YEAR} rates:</b> Livermore {rates['Livermore']:.2f}%, Pleasanton {rates['Pleasanton']:.2f}%, San Ramon {rates['San Ramon']:.2f}%, Tracy {rates['Tracy']:.2f}%.</li>
     </ul>
   </div>
 
@@ -171,7 +191,7 @@ def build_prop19(g):
     <p>If it does, your taxable value carries over unchanged. If the new home costs more, the difference is added to your taxable value.</p>
     <div class="box"><p><b>The Board of Equalization's own example:</b> A home sold for $400,000 with a taxable value of $100,000. A replacement is bought in the first year after the sale for $600,000. 105% of $400,000 is $420,000, so $180,000 is added, and the new taxable value is {_money(b_new)}.</p></div>
 
-    <h2 id="rates">2025-26 property tax rates by city</h2>
+    <h2 id="rates">{RATE_YEAR} property tax rates by city</h2>
     <p>These are typical total rates for the main tax rate areas in each city: the 1% base plus voter-approved bonds. Your exact rate is on your tax bill and can differ by neighborhood. Fixed charges, parcel taxes, and Mello-Roos (common in newer areas like Mountain House and Dougherty Valley) are billed on top.</p>
     <table class="t rates"><tr><th>City or area</th><th>County</th><th>Typical rate</th></tr>{rate_rows}</table>
     <p class="src">Sources:</p><ul class="srcs">{sources}</ul>
@@ -198,7 +218,7 @@ def build_prop19(g):
   </aside>
 {cta(rel)}
 </main>
-{CALC_JS}
+{CALC_JS.replace('RATE_YEAR', RATE_YEAR)}
 {foot(rel)}"""
     os.makedirs(os.path.join(g["SITE_ROOT"], URL_PATH), exist_ok=True)
     open(os.path.join(g["SITE_ROOT"], URL_PATH, "index.html"), "w").write(out)
@@ -264,7 +284,7 @@ CALC_JS = """<script>
     $('c-custom-wrap').hidden=!custom;
     var r=custom?num($('c-custom')):parseFloat(sel.value);
     if(custom&&r>0&&r<0.5)r=r*100; // typed as a decimal, like 0.0118
-    var label=custom?'your rate':sel.options[sel.selectedIndex].text.replace(/ \\(about.*\\)$/,'')+', 2025-26 typical rate';
+    var label=custom?'your rate':sel.options[sel.selectedIndex].text.replace(/ \\(about.*\\)$/,'')+', RATE_YEAR typical rate';
     $('c-ratenote').textContent=(r?'Using '+r.toFixed(3).replace(/0$/,'')+'% ('+label+'). ':'')+'That covers the 1% base plus voter-approved bonds, not fixed charges, parcel taxes, or Mello-Roos.';
     return r/100;
   }
