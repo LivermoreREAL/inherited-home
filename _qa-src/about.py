@@ -29,7 +29,7 @@ def build_about(g):
   <h1 class="sf">About Sam Yusufi</h1>
   <p class="lede">I help East Bay families through the sale of an inherited home, whether it's in probate or a trust. I'm a California real estate broker and a Certified Probate &amp; Trust Specialist, and I work with Legacy Real Estate &amp; Associates in Livermore.</p>
 
-  <section class="meet" id="contact" aria-label="Contact Sam Yusufi">
+  <section class="meet meet-about" id="contact" aria-label="Contact Sam Yusufi">
     <img src="{rel}assets/headshot.jpg" alt="Sam Yusufi, Realtor, Certified Probate &amp; Trust Specialist" width="140" height="140">
     <div class="mt">
       <div class="mn sf">Sam Yusufi, Realtor&reg;</div>

@@ -151,3 +151,8 @@ dl.g dd{color:#34405a;font-size:16px}
 .meet .sh{font-size:16px;font-weight:700;color:var(--navy);text-decoration:none;margin-left:4px}
 .meet .sh:hover{text-decoration:underline}
 @media (min-width:700px){.meet .socials{justify-content:flex-start}}
+
+/* About Sam card: smaller Call / Text / Email buttons (the Meet Sam card on the question pages keeps the larger ones) */
+.meet-about .mbt{gap:8px;max-width:300px;margin-left:auto;margin-right:auto}
+.meet-about .mbt a{padding:8px 6px;font-size:14px;border-radius:9px}
+@media (min-width:700px){.meet-about .mbt{margin-left:0;margin-right:0}}
