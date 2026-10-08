@@ -405,6 +405,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
 .ft .fn{font-size:18px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:2px}
 .ft .fc{font-size:16.5px;color:#34405a;line-height:1.7}
 .ft .fc a{font-size:16.5px}
+.hpw{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.fe{background:#fff4e5;border:1px solid #f0c98a;border-radius:11px;padding:14px 16px;font-size:15px;line-height:1.5;color:#4a3a1a}
+.feb{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.feb a{display:block;text-align:center;padding:11px 6px;border-radius:9px;font-weight:700;font-size:15px;text-decoration:none;border:1.5px solid var(--navy);color:var(--navy);background:#fff}
 .ft .fn a{font-weight:700}
 .ft .fd{font-size:14.5px;color:#34405a}
 .ft .fa{font-size:14px;color:var(--mut);line-height:1.6;max-width:520px;margin:8px auto 6px}
@@ -514,6 +518,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
           </select>
         </div>
         <div><label for="f-msg">Anything you&#39;d like me to know? <span class="opt">(optional)</span></label><textarea id="f-msg" name="message" placeholder="Share as much or as little as you like."></textarea></div>
+        <div class="hpw" aria-hidden="true"><label for="f-hp">Leave this empty</label><input id="f-hp" name="hp_url" tabindex="-1" autocomplete="off"></div>
+        <div class="fe" id="fe" role="alert" hidden>
+          <b>I couldn&#39;t send that just now.</b> I don&#39;t want to lose your request, so please text or call me instead, or send it by email.
+          <div class="feb"><a href="sms:+19254258929?&amp;body=Hi%20Sam%2C%20I%20have%20a%20question%20about%20an%20inherited%20home.">Text</a><a href="tel:+19254258929">Call</a><a href="#" id="fe-mail">Email</a></div>
+        </div>
         <button class="btn" type="submit">Get the Free Guide &rarr;</button>
       </form>
       <div class="or">or, if you&#39;d rather talk</div>
@@ -529,7 +538,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
     <h2 class="sf">Your guide is ready.</h2>
     <p>Thank you for trusting me with a little of your story.</p>
     <a class="btn g" href="What-Happens-to-the-House.pdf" target="_blank" rel="noopener">Download the Guide (PDF)</a>
-    <p>Your email app also opened with your details. Hit send, and I&#39;ll follow up gently, on your timeline.</p>
+    <p id="db-note">Your email app also opened with your details. Hit send, and I&#39;ll follow up gently, on your timeline.</p>
     <p>Prefer to talk? <a href="sms:+19254258929?&amp;body=Hi%20Sam%2C%20I%20have%20a%20question%20about%20an%20inherited%20home.">Text me</a>.</p>
   </section>
 
@@ -577,10 +586,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
 </main>
 <script>
 (function(){
-  var f=document.getElementById("vf");
-  f.addEventListener("submit",function(e){
-    e.preventDefault();
-    var d=new FormData(f);
+  var ENDPOINT="";
+  var f=document.getElementById("vf"), started=Date.now();
+  function mailtoUrl(d){
     var body=[
       "Name: "+d.get("name"),
       "Email: "+d.get("email"),
@@ -591,13 +599,49 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
       "",
       "Message: "+(d.get("message")||"")
     ].join("\r\n");
-    var url="mailto:sam@samyusufi.com?subject="+encodeURIComponent("Inherited home guide request: "+d.get("name"))+"&body="+encodeURIComponent(body);
-    // Tell Google Analytics about the sign-up first (as a beacon), then open the email app.
-    var done=false,go=function(){if(!done){done=true;location.href=url;}};
-    if(window.gtag){gtag("event","generate_lead",{lead_source:"guide_form",role:d.get("role"),stage:d.get("stage"),transport_type:"beacon",event_callback:go,event_timeout:600});setTimeout(go,700);}else{go();}
+    return "mailto:sam@samyusufi.com?subject="+encodeURIComponent("Inherited home guide request: "+d.get("name"))+"&body="+encodeURIComponent(body);
+  }
+  function thanks(note){
     document.getElementById("fb").hidden=true;
+    if(note)document.getElementById("db-note").textContent=note;
     document.getElementById("db").hidden=false;
     window.scrollTo({top:0});
+  }
+  // The original way: tell Google Analytics, then open the visitor's email app. Used until the lead catcher is switched on.
+  function legacy(d){
+    var url=mailtoUrl(d), done=false, go=function(){if(!done){done=true;location.href=url;}};
+    if(window.gtag){gtag("event","generate_lead",{lead_source:"guide_form",role:d.get("role"),stage:d.get("stage"),transport_type:"beacon",event_callback:go,event_timeout:600});setTimeout(go,700);}else{go();}
+    thanks();
+  }
+  function uid(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2);}
+  function limit(ms,p){return new Promise(function(res,rej){var t=setTimeout(function(){rej(new Error("timeout"));},ms);p.then(function(v){clearTimeout(t);res(v);},function(e){clearTimeout(t);rej(e);});});}
+  function send(data){
+    return limit(15000,fetch(ENDPOINT,{method:"POST",body:data,redirect:"follow"}).then(function(r){return r.json();}).then(function(j){
+      if(!j||j.ok!==true){var er=new Error("server");er.answered=true;throw er;}
+    })).catch(function(err){
+      if(err&&err.answered)throw err;   // the server answered and said no
+      // The browser may have blocked reading the reply even though the request went through, or the connection blipped.
+      // Send once more without reading the reply. The server ignores a repeated request id, so nothing is saved twice.
+      return limit(15000,fetch(ENDPOINT,{method:"POST",body:data,mode:"no-cors"}));
+    });
+  }
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var d=new FormData(f);
+    if(!ENDPOINT){legacy(d);return;}
+    var btn=f.querySelector('button[type="submit"]'), label=btn.textContent, fe=document.getElementById("fe");
+    btn.disabled=true; btn.textContent="Sending"; fe.hidden=true;
+    var data=new URLSearchParams();
+    ["name","email","phone","property_address","role","stage","message","hp_url"].forEach(function(k){data.append(k,d.get(k)||"");});
+    data.append("id",uid()); data.append("t",String(Date.now()-started)); data.append("page",location.pathname);
+    send(data).then(function(){
+      if(window.gtag)gtag("event","generate_lead",{lead_source:"guide_form",role:d.get("role"),stage:d.get("stage")});
+      thanks("I have your details, and I\u2019ll follow up gently, on your timeline. A copy of the guide is also on its way to your email.");
+    }).catch(function(){
+      document.getElementById("fe-mail").href=mailtoUrl(d);
+      fe.hidden=false; btn.disabled=false; btn.textContent=label;
+      fe.scrollIntoView({block:"center",behavior:"smooth"});
+    });
   });
 })();
 </script>

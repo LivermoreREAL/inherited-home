@@ -54,3 +54,8 @@ document.addEventListener('click',function(e){{
 }});
 </script>"""
 PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me."
+
+# ---------- Lead catcher (Google Apps Script web app, see _leads/README.md) ----------
+# Empty = the guide form opens the visitor's email app, as before.
+# Paste the deployed web app's /exec URL here to send leads straight to the Google Sheet and email instead.
+LEADS_ENDPOINT = ""
