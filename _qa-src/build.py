@@ -165,6 +165,18 @@ def build_home():
       <li>I treat the home as your family's loss to move through with care, not a transaction to rush.</li>
     </ul>
     <p>I serve families in {CITY_LIST}, across Alameda and Contra Costa Counties, in English, Farsi, Dari, and Hindi.</p>
+    <div class="hcta" id="contact">
+      <div class="hk">Questions about your family's situation?</div>
+      <div class="ht sf">Let's talk it through</div>
+      <div class="hs">Call or text me, or send an email. No pressure, no obligation.</div>
+      <a class="hph" href="tel:+19254258929">925.425.8929</a>
+      <a class="hem" href="mailto:sam@samyusufi.com">sam@samyusufi.com</a>
+      <div class="hb">
+        <a class="b1" href="tel:+19254258929">Call</a>
+        <a class="b2" href="{SMS}">Text</a>
+        <a class="b2" href="mailto:sam@samyusufi.com">Email</a>
+      </div>
+    </div>
   </section>
   <p class="src">More free information: <a href="https://selfhelp.courts.ca.gov/probate">California Courts self-help: probate</a></p>
 </main>

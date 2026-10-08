@@ -102,3 +102,18 @@ dl.g dd{color:#34405a;font-size:16px}
 .eho{display:inline-flex;align-items:center;gap:6px;margin-top:6px}
 .eho svg{width:17px;height:17px}
 .fine{font-size:11px;color:#8a92a3;max-width:560px;margin:8px auto 0;line-height:1.6}
+
+/* "Let's talk it through" call to action (inside the cream help box) */
+.hcta{background:#fff;border:1px solid #ead9b0;border-radius:16px;padding:24px 20px 22px;margin:24px auto 4px;max-width:420px;text-align:center}
+.hcta .hk{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+.hcta .ht{font-size:25px;font-weight:700;color:var(--navy);line-height:1.2;margin-bottom:8px}
+.hcta .hs{font-size:16.5px;color:#34405a;margin-bottom:14px}
+.hcta .hph{display:block;font-size:32px;font-weight:700;color:var(--navy);text-decoration:none;line-height:1.15;margin-bottom:4px}
+.hcta .hem{display:block;font-size:20px;font-weight:600;color:var(--navy);text-decoration:none;margin-bottom:18px;word-break:break-word}
+.hcta .hph:hover,.hcta .hem:hover{text-decoration:underline}
+.hcta .hb{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:9px}
+.hcta .hb a{display:block;padding:14px 6px;border-radius:11px;font-weight:700;font-size:16px;text-decoration:none;text-align:center}
+.hcta .hb .b1{background:var(--navy);color:#fff}
+.hcta .hb .b1:hover{background:#0a2c63}
+.hcta .hb .b2{border:1.5px solid var(--navy);color:var(--navy);background:#fff}
+.hcta .hb .b2:hover{background:var(--navy);color:#fff}
