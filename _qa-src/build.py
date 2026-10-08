@@ -8,14 +8,15 @@ import prop19 as P19
 SITE = "https://youreastbay.com/"
 BASE = SITE + "what-happens-to-the-house/"
 LANDING = "/"  # the guide sign-up page is the site home
-UPDATED_ISO, UPDATED = "2026-09-29", "September 2026"
+UPDATED_ISO, UPDATED = "2026-09-29", "September 2026"   # when the answers' content was last reviewed
+SITE_REFRESH_ISO = "2026-10-07"                             # when any page of the site last changed (sitemap lastmod)
 SMS = "sms:+19254258929?&amp;body=Hi%20Sam%2C%20I%20have%20a%20question%20about%20an%20inherited%20home."
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
 BY = {p["slug"]: p for p in PAGES}
 esc = lambda s: html.escape(s, quote=True)
 
-from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE  # shared with the home page build
+from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE, PHONE_DISPLAY, PHONE_TEL, EMAIL, PHONE_ICON, CONTACT_CSS_RAW, contact_bar, CONTACT_JS  # shared with the home page build
 
 def head(title, desc, url, rel, ogtype, ld, noindex=False, og=None):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
@@ -45,12 +46,13 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False, og=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{rel}assets/site.css">
+<style>{CONTACT_CSS_RAW}</style>
 <script type="application/ld+json">
 {json.dumps(ld, indent=1, ensure_ascii=False)}
 </script>
 </head>
 <body>
-<header class="top"><div class="in"><a class="brand sf" href="{rel or './'}">What Happens to the House?</a><a class="tbtn" href="{LANDING}">Free guide</a></div></header>
+<header class="top"><div class="in"><a class="brand sf" href="{rel or './'}">What Happens to the House?</a><a class="tcall" href="{PHONE_TEL}">{PHONE_ICON}<span class="tl">Call or text&nbsp;</span><span class="tn">{PHONE_DISPLAY}</span><span class="tm">Call</span></a><a class="tbtn" href="{LANDING}">Free guide</a></div></header>
 """
 
 def cta(rel):
@@ -60,22 +62,40 @@ def cta(rel):
   <a class="g" href="{LANDING}">Get the Free Guide</a>
   <a class="o" href="{SMS}">Text Me</a>
   <p class="n">A no-pressure conversation, whenever you're ready.</p>
-</section>"""
+</section>
+{meet(rel)}"""
 
 def foot(rel):
     return f"""<footer class="ft">
   <img src="{rel}assets/logo-combined.png" alt="Sam Yusufi, Realtor&reg; | Legacy Real Estate &amp; Associates" width="120" height="97">
   <div class="sg sf">See you around town.</div>
   Sam Yusufi, Realtor&reg; &middot; Associate Broker &middot; Certified Probate &amp; Trust Specialist &middot; DRE# 02020587<br>
-  Legacy Real Estate &amp; Associates &middot; <a href="tel:+19254258929">925.425.8929</a> &middot; <a href="mailto:sam@samyusufi.com">sam@samyusufi.com</a><br>
+  Legacy Real Estate &amp; Associates<br>
+  <span class="fcon">Call or text <a href="{PHONE_TEL}">{PHONE_DISPLAY}</a> &middot; <a href="mailto:{EMAIL}">{EMAIL}</a></span><br>
   <span class="area">{SERVING}</span><br>
   <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
   <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. {esc(PRIVACY_NOTE)}</p>
 </footer>
+{contact_bar(LANDING, "Free guide")}
+{CONTACT_JS}
 </body>
 </html>
 """
+
+def meet(rel):
+    # "Meet Sam" card: face, credentials, and one-tap Call / Text / Email, shown after the guide call to action.
+    return f"""<section class="meet" id="contact" aria-label="Contact Sam Yusufi">
+  <img src="{rel}assets/headshot.jpg" alt="Sam Yusufi, Realtor, Certified Probate &amp; Trust Specialist" width="140" height="140">
+  <div class="mt">
+    <div class="mk">Questions about your family's situation?</div>
+    <div class="mn sf">Sam Yusufi, Realtor&reg;</div>
+    <div class="mr">Certified Probate &amp; Trust Specialist &middot; DRE#&nbsp;02020587</div>
+    <p>I'm happy to talk it through, on your timeline.</p>
+    <a class="mph" href="{PHONE_TEL}">{PHONE_ICON}{PHONE_DISPLAY}</a>
+    <div class="mbt"><a class="m1" href="{PHONE_TEL}">Call</a><a class="m2" href="{SMS}">Text</a><a class="m2" href="mailto:{EMAIL}">Email</a></div>
+  </div>
+</section>"""
 
 def byline(rel):
     return f"""<div class="by"><img src="{rel}assets/headshot.jpg" alt="Sam Yusufi" width="36" height="36"><span>By <a href="{rel or './'}#about">Sam Yusufi</a>, Certified Probate &amp; Trust Specialist<br>Updated <time datetime="{UPDATED_ISO}">{UPDATED}</time></span></div>"""
@@ -199,10 +219,42 @@ def build_404():
 {foot(rel)}"""
     open(os.path.join(SITE_ROOT, "404.html"), "w").write(out)
 
+from html.parser import HTMLParser
+
+class _Text(HTMLParser):
+    """Turns a page body into plain text: paragraphs, list items as dashes, table rows joined with bars."""
+    def __init__(self):
+        super().__init__(); self.out = []; self.cell = []; self.row = None; self.in_dt = False
+    def handle_starttag(self, tag, attrs):
+        if tag in ("p", "ol", "ul", "table", "dl", "h2", "h3"): self.out.append("\n")
+        if tag == "li": self.out.append("\n- ")
+        if tag == "tr": self.row = []
+        if tag in ("td", "th", "dt"): self.cell = []
+        if tag == "dt": self.in_dt = True
+    def handle_endtag(self, tag):
+        if tag in ("td", "th") and self.row is not None: self.row.append(" ".join("".join(self.cell).split()))
+        if tag == "tr" and self.row is not None: self.out.append("\n" + " | ".join(self.row)); self.row = None
+        if tag == "dt": self.out.append("\n" + " ".join("".join(self.cell).split()) + ": "); self.in_dt = False
+        if tag in ("p", "h2", "h3", "dd"): self.out.append("\n")
+    def handle_data(self, d):
+        self.cell.append(d)
+        if self.row is None and not self.in_dt: self.out.append(d)
+
+def to_text(h):
+    t = _Text(); t.feed(h)
+    lines = [" ".join(l.split()) for l in "".join(t.out).splitlines()]
+    out, blank = [], False
+    for l in lines:
+        if l: out.append(l); blank = False
+        elif not blank: out.append(""); blank = True
+    # keep list items together: drop the blank line between two "- " items
+    tight = [l for i, l in enumerate(out) if not (l == "" and 0 < i < len(out) - 1 and out[i-1].startswith("- ") and out[i+1].startswith("- "))]
+    return "\n".join(tight).strip()
+
 def build_meta():
     urls = [SITE, BASE, SITE + "prop19-calculator/"] + [BASE + p["slug"] + "/" for p in PAGES]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sm += "".join(f"  <url><loc>{u}</loc><lastmod>{UPDATED_ISO}</lastmod></url>\n" for u in urls) + "</urlset>\n"
+    sm += "".join(f"  <url><loc>{u}</loc><lastmod>{SITE_REFRESH_ISO}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(os.path.join(SITE_ROOT, "sitemap.xml"), "w").write(sm)
     bots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "Claude-SearchBot", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "Bingbot", "Googlebot"]
     rb = "# Everyone is welcome to read and cite this site, including AI assistants.\nUser-agent: *\nAllow: /\n\n" + "".join(f"User-agent: {b}\nAllow: /\n\n" for b in bots) + f"Sitemap: {SITE}sitemap.xml\n"
@@ -212,9 +264,19 @@ def build_meta():
 > Answers for California families with an inherited home, whether it's in probate or a trust: who's in charge, what to do first, how probate sales and overbids work, trust sales, Prop 19, stepped-up basis, and selling. Written by Sam Yusufi, Realtor(R), Associate Broker and Certified Probate & Trust Specialist (CPTS), Legacy Real Estate & Associates, California DRE# 02020587. Serving the East Bay: {CITY_LIST}, across Alameda and Contra Costa Counties, California. General information about California law, current as of {UPDATED}; not legal or tax advice.
 
 Contact: Sam Yusufi, 925.425.8929 (call or text), sam@samyusufi.com, https://samyusufi.com
+Full text of every answer in one file: {SITE}llms-full.txt
+
 Free printable guide (15 pages): {SITE}
 All questions: {BASE}
 Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rates for Alameda, Contra Costa, and San Joaquin counties): {SITE}prop19-calculator/
+
+## About the author
+
+Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management, and chairs the marketing group of the Valley Real Estate Network. She serves families in English, Farsi, Dari, and Hindi. LinkedIn: https://www.linkedin.com/in/yusufi/
+
+## How to cite
+
+Please cite the specific answer page, name Sam Yusufi, CPTS (DRE# 02020587) as the author, and note that the content is general information about California law, not legal or tax advice. Each answer starts with a short, quotable "Short answer". Answers are current as of {UPDATED}; the Prop 19 limits and tax rates are reviewed every year.
 
 ## Free tool
 
@@ -224,6 +286,14 @@ Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rate
     for name, slugs in GROUPS:
         lt += f"## {name}\n\n" + "".join(f"- [{BY[s]['h1']}]({BASE}{s}/): {BY[s]['short']}\n" for s in slugs) + "\n"
     open(os.path.join(SITE_ROOT, "llms.txt"), "w").write(lt)
+    full = (f"# What Happens to the House? (full text)\n\nBy Sam Yusufi, Realtor(R), Associate Broker and Certified Probate & Trust Specialist (CPTS), Legacy Real Estate & Associates, California DRE# 02020587. "
+            f"{SERVING} General information about California law, current as of {UPDATED}; not legal or tax advice. Contact: 925.425.8929, sam@samyusufi.com, https://samyusufi.com\n\n")
+    for name, slugs in GROUPS:
+        for s_ in slugs:
+            q = BY[s_]; body = q["body"]
+            if q.get("glossary"): body = "<dl>" + "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in q["glossary"]) + "</dl>"
+            full += f"---\n\n## {q['h1']}\n\nURL: {BASE}{s_}/\nTopic: {name}\n\nShort answer: {q['short']}\n\n{to_text(body)}\n\n"
+    open(os.path.join(SITE_ROOT, "llms-full.txt"), "w").write(full)
 
 for p in PAGES:
     build_page(p)

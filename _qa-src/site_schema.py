@@ -23,7 +23,9 @@ PERSON = {
     {"@type": "EducationalOccupationalCredential", "name": "California Real Estate Broker License", "identifier": "DRE# 02020587", "credentialCategory": "license",
      "recognizedBy": {"@type": "GovernmentOrganization", "name": "California Department of Real Estate"}}],
   "areaServed": AREAS,
-  "knowsLanguage": ["English", "Persian", "Hindi"],
+  "description": "Realtor and Associate Broker (DRE# 02020587) and Certified Probate & Trust Specialist at Legacy Real Estate & Associates in Livermore, California. More than 20 years of professional experience, including over a decade in real estate and property management. Helps East Bay families sell inherited homes in probate or a trust, and chairs the marketing group of the Valley Real Estate Network.",
+  "knowsLanguage": ["English", "Persian", "Dari", "Hindi"],
+  "memberOf": [{"@type": "Organization", "name": "Bay East Association of Realtors"}, {"@type": "Organization", "name": "Valley Real Estate Network"}, {"@type": "Organization", "name": "Real Estate Alliance of Livermore"}],
   "sameAs": ["https://www.facebook.com/samyusufibroker/", "https://www.linkedin.com/in/yusufi/", "https://www.instagram.com/samyusufi7/"],
 }
 
@@ -31,26 +33,29 @@ ICON_TAGS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="ico
 
 # Google Analytics 4 (property "youreastbay.com" in the "Sam Yusufi Real Estate" account).
 # Counts page views, plus these events: generate_lead (guide form sent), text_me (sms taps),
-# call_click, email_click, and guide_cta_click (a "Free guide" button that leads to the form).
+# call_click, email_click, guide_cta_click (a "Free guide" button that leads to the form), and guide_jump
+# (the phone button that scrolls to the form). Each tap also says where on the page it happened (placement).
 # No names, emails, phone numbers, or addresses are ever sent to Google.
 GA_ID = "G-CXF6CNWM21"
 ANALYTICS = f"""<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
 gtag('js',new Date());gtag('config','{GA_ID}');
+function pl(a){{var m=[['.cbar','sticky_bar'],['.meet','meet_sam'],['.top','header'],['.hero','hero'],['.hcta','cta_card'],['.ag','agent_card'],['.ft','footer'],['.fe','form_fallback'],['.db','thank_you'],['.bd','form'],['.cta','page_cta'],['.hp','help_box']];for(var i=0;i<m.length;i++){{if(a.closest(m[i][0]))return m[i][1];}}return 'other';}}
 document.addEventListener('click',function(e){{
   var a=e.target.closest&&e.target.closest('a');if(!a)return;
-  var h=a.getAttribute('href')||'',p={{link_location:location.pathname}};
+  var h=a.getAttribute('href')||'',p={{link_location:location.pathname,placement:pl(a)}};
   var n=h.indexOf('sms:')===0?'text_me':h.indexOf('tel:')===0?'call_click':h.indexOf('mailto:')===0?'email_click':'';
   if(n){{
     // Texting, calling, and email apps take over the screen right away, which can cut off the
     // message to Google. Send it first (as a beacon), then open the app a moment later.
     e.preventDefault();
     var done=false,go=function(){{if(!done){{done=true;location.href=h;}}}};
-    gtag('event',n,{{link_location:p.link_location,transport_type:'beacon',event_callback:go,event_timeout:600}});
+    gtag('event',n,{{link_location:p.link_location,placement:p.placement,transport_type:'beacon',event_callback:go,event_timeout:600}});
     setTimeout(go,700);
   }}
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
+  else if(h==='#guide')gtag('event','guide_jump',p);
 }});
 </script>"""
 PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me."
@@ -59,3 +64,35 @@ PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see 
 # Empty = the guide form opens the visitor's email app, as before.
 # Paste the deployed web app's /exec URL here to send leads straight to the Google Sheet and email instead.
 LEADS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxmoYm3Gy8GN2AIF1A80Y_kJ9MATNOyFMFDu4otTAe_ZThk8IXxfMJZ8ARSERRtgJAQ/exec"
+
+# ---------- Contact pieces shared by the home page and the question pages ----------
+PHONE_DISPLAY = "925.425.8929"
+PHONE_TEL = "tel:+19254258929"
+EMAIL = "sam@samyusufi.com"
+SMS_HREF = "sms:+19254258929?&amp;body=Hi%20Sam%2C%20I%20have%20a%20question%20about%20an%20inherited%20home."
+PHONE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>'
+
+# Mobile-only bar pinned to the bottom of the screen: Call, Text, and the guide. Hidden while a form field is in use.
+CONTACT_CSS_RAW = """
+.cbar{display:none}
+@media (max-width:719px){
+  body.hascbar{padding-bottom:78px}
+  .cbar{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.98);border-top:1px solid var(--ln);box-shadow:0 -6px 20px rgba(0,29,73,.12);transition:transform .2s}
+  .cbar.hide{transform:translateY(130%)}
+  .cbar a{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 6px;border-radius:11px;font:700 15px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-decoration:none;white-space:nowrap}
+  .cbar svg{width:16px;height:16px}
+  .cb1{background:var(--navy);color:#fff}
+  .cb2{border:1.5px solid var(--navy);color:var(--navy);background:#fff}
+  .cb3{background:var(--gold-lt);color:var(--navy)}
+}
+"""
+def contact_bar(guide_href, guide_label):
+    return (f'<nav class="cbar" aria-label="Contact Sam">'
+            f'<a class="cb1" href="{PHONE_TEL}">{PHONE_ICON}Call</a>'
+            f'<a class="cb2" href="{SMS_HREF}">Text</a>'
+            f'<a class="cb3" href="{guide_href}">{guide_label}</a></nav>')
+CONTACT_JS = """<script>
+(function(){var b=document.querySelector('.cbar');if(!b)return;document.body.classList.add('hascbar');
+document.addEventListener('focusin',function(e){if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))b.classList.add('hide');});
+document.addEventListener('focusout',function(){b.classList.remove('hide');});})();
+</script>"""
