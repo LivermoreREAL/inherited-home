@@ -58,4 +58,4 @@ PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see 
 # ---------- Lead catcher (Google Apps Script web app, see _leads/README.md) ----------
 # Empty = the guide form opens the visitor's email app, as before.
 # Paste the deployed web app's /exec URL here to send leads straight to the Google Sheet and email instead.
-LEADS_ENDPOINT = ""
+LEADS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxmoYm3Gy8GN2AIF1A80Y_kJ9MATNOyFMFDu4otTAe_ZThk8IXxfMJZ8ARSERRtgJAQ/exec"
