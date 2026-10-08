@@ -23,7 +23,7 @@ PERSON = {
     {"@type": "EducationalOccupationalCredential", "name": "California Real Estate Broker License", "identifier": "DRE# 02020587", "credentialCategory": "license",
      "recognizedBy": {"@type": "GovernmentOrganization", "name": "California Department of Real Estate"}}],
   "areaServed": AREAS,
-  "description": "Realtor and Associate Broker (DRE# 02020587) and Certified Probate & Trust Specialist at Legacy Real Estate & Associates in Livermore, California. More than 20 years of professional experience, including over a decade in real estate and property management. Helps East Bay families sell inherited homes in probate or a trust, and chairs the marketing group of the Valley Real Estate Network.",
+  "description": "Realtor and Associate Broker (DRE# 02020587) and Certified Probate & Trust Specialist at Legacy Real Estate & Associates in Livermore, California. More than 20 years of professional experience, including over a decade in real estate and property management. Helps East Bay families sell inherited homes in probate or a trust.",
   "knowsLanguage": ["English", "Persian", "Dari", "Hindi"],
   "memberOf": [{"@type": "Organization", "name": "Bay East Association of Realtors"}, {"@type": "Organization", "name": "Valley Real Estate Network"}, {"@type": "Organization", "name": "Real Estate Alliance of Livermore"}],
   "sameAs": ["https://www.facebook.com/samyusufibroker/", "https://www.linkedin.com/in/yusufi/", "https://www.instagram.com/samyusufi7/"],

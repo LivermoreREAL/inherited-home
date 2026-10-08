@@ -272,7 +272,7 @@ Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rate
 
 ## About the author
 
-Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management, and chairs the marketing group of the Valley Real Estate Network. She serves families in English, Farsi, Dari, and Hindi. LinkedIn: https://www.linkedin.com/in/yusufi/
+Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management. She serves families in English, Farsi, Dari, and Hindi. LinkedIn: https://www.linkedin.com/in/yusufi/
 
 ## How to cite
 
