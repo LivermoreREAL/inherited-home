@@ -1,11 +1,11 @@
-# Lead catcher for youreastbay.com
+# Lead catcher for whathappenstothehouse.com
 
 The guide form on the home page can send leads straight to a Google Sheet and email, instead of opening the visitor's email app.
 It is written in `Code.gs` (Google Apps Script). It stays off until `LEADS_ENDPOINT` in `_qa-src/site_schema.py` holds the web app's URL.
 With the setting empty, the form opens the visitor's email app, as before.
 
 What happens when someone sends the form:
-1. A row is added to the Google Sheet "youreastbay.com Leads" (created automatically in the Drive of the account that deploys the script).
+1. A row is added to the Google Sheet "whathappenstothehouse.com Leads" (created automatically in the Drive of the account that deploys the script).
    Columns include a "Follow-up status" dropdown. New leads are highlighted.
 2. Sam gets an email (sam@samyusufi.com). Reply goes straight to the visitor.
 3. The visitor gets a short thank-you email from Sam with the guide link (at most one every few hours per address).
@@ -16,7 +16,7 @@ Protection: a hidden field bots fill, a minimum fill time, a per-request id (rep
 and a cap of 40 submissions per hour.
 
 ## One-time setup (sign in as sam@samyusufi.com)
-1. Go to https://script.google.com, click New project, and name it "youreastbay.com leads".
+1. Go to https://script.google.com, click New project, and name it "whathappenstothehouse.com leads".
 2. Replace the editor's contents with `Code.gs` from this folder. Save.
 3. Choose the function `setup` and click Run. Approve Google's permission screen (spreadsheets and sending email as you). The log shows the new Sheet's link.
 4. Choose `sendTest` and click Run. Check that a row appeared and that two emails arrived (one notice, one thank-you), both in your inbox.

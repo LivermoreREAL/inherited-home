@@ -38,4 +38,4 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-Sitemap: https://youreastbay.com/sitemap.xml
+Sitemap: https://whathappenstothehouse.com/sitemap.xml

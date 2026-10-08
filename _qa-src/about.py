@@ -1,4 +1,4 @@
-# Builds the "About Sam" page (youreastbay.com/about-sam/). Called from build.py after the calculator page.
+# Builds the "About Sam" page (whathappenstothehouse.com/about-sam/). Called from build.py after the calculator page.
 # Text comes from Sam's approved "About Sam Yusufi" bio and her profile; no testimonials or numbers beyond what she has given.
 import os, json
 

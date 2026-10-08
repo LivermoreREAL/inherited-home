@@ -1,9 +1,9 @@
-# Yearly updates for youreastbay.com (Prop 19 calculator)
+# Yearly updates for whathappenstothehouse.com (Prop 19 calculator)
 
 Two things change over time. Both are set in ONE place: the settings block at the top of `_qa-src/prop19.py`.
 The calculator page, its FAQ and structured data, the Q&A Prop 19 page, and llms.txt all read from it.
 
-Repo: `~/Documents/Claude/Projects/inherited-home` (GitHub: LivermoreREAL/inherited-home, GitHub Pages, custom domain youreastbay.com).
+Repo: `~/Documents/Claude/Projects/inherited-home` (GitHub: LivermoreREAL/inherited-home, GitHub Pages, custom domain whathappenstothehouse.com).
 Writing rules for anything a visitor sees: no em dashes, plain and calm tone, California only.
 
 ---
@@ -55,14 +55,14 @@ Then check:
 Publish:
 ```
 git add -A && git commit -m "Update Prop 19 calculator: <what changed>" && git push
-until curl -s https://youreastbay.com/prop19-calculator/ | grep -q "<new value>"; do sleep 15; done
+until curl -s https://whathappenstothehouse.com/prop19-calculator/ | grep -q "<new value>"; do sleep 15; done
 ```
 Git pushes use the macOS keychain credentials for GitHub user LivermoreREAL (already set up).
 
 After it's live:
-1. Bing Webmaster Tools > URL Submission (site youreastbay.com): submit `https://youreastbay.com/prop19-calculator/`
-   and `https://youreastbay.com/what-happens-to-the-house/prop-19-inherited-home/`.
-2. Google Search Console (domain property youreastbay.com) > URL inspection > Request indexing for the calculator URL.
+1. Bing Webmaster Tools > URL Submission (site whathappenstothehouse.com): submit `https://whathappenstothehouse.com/prop19-calculator/`
+   and `https://whathappenstothehouse.com/what-happens-to-the-house/prop-19-inherited-home/`.
+2. Google Search Console (domain property whathappenstothehouse.com) > URL inspection > Request indexing for the calculator URL.
 3. Update the Notes cell in row 19 of the Google Sheet "Sam Yusufi — Websites & Admin Links"
    (https://docs.google.com/spreadsheets/d/1QBh4KliTq76Ott_1No7fj7U9uVTmx_k502MlplTj1O0/edit).
 4. Tell Sam in plain English what changed.

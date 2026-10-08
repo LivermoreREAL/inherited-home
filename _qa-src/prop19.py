@@ -223,7 +223,7 @@ def build_prop19(g):
     os.makedirs(os.path.join(g["SITE_ROOT"], URL_PATH), exist_ok=True)
     open(os.path.join(g["SITE_ROOT"], URL_PATH, "index.html"), "w").write(out)
 
-    # Short, shareable link: youreastbay.com/prop19 sends visitors to the calculator.
+    # Short, shareable link: whathappenstothehouse.com/prop19 sends visitors to the calculator.
     stub = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Prop 19 Calculator</title>
 <link rel="canonical" href="{url}"><meta http-equiv="refresh" content="0; url=/{URL_PATH}">
 <script>location.replace("/{URL_PATH}"+location.search+location.hash);</script></head>

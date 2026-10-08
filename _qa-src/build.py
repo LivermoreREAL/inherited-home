@@ -1,15 +1,15 @@
 # Builds the "What Happens to the House?" question pages from content.py into what-happens-to-the-house/,
-# plus the site-wide sitemap.xml, robots.txt, llms.txt and 404.html at the youreastbay.com root.
+# plus the site-wide sitemap.xml, robots.txt, llms.txt and 404.html at the whathappenstothehouse.com root.
 # Run from the repo root: python3 _qa-src/build.py
 import html, json, os
 from content import PAGES, GROUPS
 import prop19 as P19
 
-SITE = "https://youreastbay.com/"
+SITE = "https://whathappenstothehouse.com/"
 BASE = SITE + "what-happens-to-the-house/"
 LANDING = "/"  # the guide sign-up page is the site home
 UPDATED_ISO, UPDATED = "2026-09-29", "September 2026"   # when the answers' content was last reviewed
-SITE_REFRESH_ISO = "2026-10-07"                             # when any page of the site last changed (sitemap lastmod)
+SITE_REFRESH_ISO = "2026-10-08"                             # when any page of the site last changed (sitemap lastmod)
 SMS = "sms:+19254258929?&amp;body=Hi%20Sam%2C%20I%20have%20a%20question%20about%20an%20inherited%20home."
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
@@ -205,7 +205,7 @@ def build_home():
     open(os.path.join(ROOT, "index.html"), "w").write(out)
 
 def build_404():
-    # Served by GitHub Pages for any missing path on youreastbay.com (including old WordPress links), so every URL is root-relative.
+    # Served by GitHub Pages for any missing path on whathappenstothehouse.com (including old WordPress links), so every URL is root-relative.
     rel = "/what-happens-to-the-house/"
     out = head("Page not found | What Happens to the House?", "This page isn't here anymore. Find the free guide and answers for California families with an inherited home.",
                SITE, rel, "website", {"@context": "https://schema.org", "@type": "WebPage", "name": "Page not found"}, noindex=True)

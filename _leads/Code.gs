@@ -1,8 +1,8 @@
 /**
- * youreastbay.com lead catcher (Sam Yusufi)
+ * whathappenstothehouse.com lead catcher (Sam Yusufi)
  *
- * When the guide form on youreastbay.com is sent, this script:
- *   1. Adds a row to the "youreastbay.com Leads" Google Sheet (created automatically in the Drive of the account that deploys this).
+ * When the guide form on whathappenstothehouse.com is sent, this script:
+ *   1. Adds a row to the "whathappenstothehouse.com Leads" Google Sheet (created automatically in the Drive of the account that deploys this).
  *   2. Emails Sam a notification. Reply goes straight to the visitor.
  *   3. Emails the visitor a short thank-you with the guide link.
  *
@@ -13,10 +13,10 @@
 
 var CFG = {
   NOTIFY_TO: 'sam@samyusufi.com',
-  SHEET_TITLE: 'youreastbay.com Leads',
+  SHEET_TITLE: 'whathappenstothehouse.com Leads',
   TAB: 'Leads',
-  GUIDE_URL: 'https://youreastbay.com/What-Happens-to-the-House.pdf',
-  SITE_URL: 'https://youreastbay.com/',
+  GUIDE_URL: 'https://whathappenstothehouse.com/What-Happens-to-the-House.pdf',
+  SITE_URL: 'https://whathappenstothehouse.com/',
   MAIN_SITE_URL: 'https://samyusufi.com/',
   PHONE_DISPLAY: '925.425.8929',
   PHONE_TEL: '+19254258929',
@@ -29,7 +29,7 @@ var HEADERS = ['Received', 'Name', 'Email', 'Phone', 'Property address', 'Role',
 // ---------- web app entry points ----------
 
 function doGet() {
-  return reply_({ ok: true, service: 'youreastbay.com leads' });
+  return reply_({ ok: true, service: 'whathappenstothehouse.com leads' });
 }
 
 function doPost(e) {
@@ -170,7 +170,7 @@ function notify_(l, sheetUrl) {
   ];
   var tel = 'tel:' + l.phone.replace(/[^\d+]/g, '');
   var html = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#1d2433">' +
-    '<p style="margin:0 0 10px"><b>New guide request from youreastbay.com</b></p>' +
+    '<p style="margin:0 0 10px"><b>New guide request from whathappenstothehouse.com</b></p>' +
     '<table style="border-collapse:collapse;font-size:15px">' + [
       ['Name', esc_(l.name)],
       ['Phone', '<a href="' + esc_(tel) + '">' + esc_(l.phone) + '</a>'],
@@ -186,7 +186,7 @@ function notify_(l, sheetUrl) {
   MailApp.sendEmail({
     to: CFG.NOTIFY_TO,
     replyTo: l.email,
-    name: 'youreastbay.com leads',
+    name: 'whathappenstothehouse.com leads',
     subject: 'New guide request: ' + l.name + (l.role ? ' (' + l.role + ')' : ''),
     body: lines.join('\n'),
     htmlBody: html
@@ -212,7 +212,7 @@ function thankYou_(l, cache) {
     'Sam Yusufi, Realtor®',
     'Certified Probate & Trust Specialist',
     'Legacy Real Estate & Associates | DRE# 02020587',
-    CFG.PHONE_DISPLAY + ' | youreastbay.com | samyusufi.com',
+    CFG.PHONE_DISPLAY + ' | whathappenstothehouse.com | samyusufi.com',
     '',
     'General information about California law, not legal or tax advice.'
   ].join('\n');
@@ -223,7 +223,7 @@ function thankYou_(l, cache) {
     "<p>It covers who's in charge, what to do first, and how a probate or trust sale works. You don't have to read it all at once.</p>" +
     '<p>If you\'d like to talk it through, reply to this email, or call or text me at <a href="tel:' + CFG.PHONE_TEL + '">' + CFG.PHONE_DISPLAY + '</a>.</p>' +
     '<p style="margin-top:22px">Sam Yusufi, Realtor&reg;<br>Certified Probate &amp; Trust Specialist<br>Legacy Real Estate &amp; Associates | DRE# 02020587<br>' +
-    CFG.PHONE_DISPLAY + ' | <a href="' + CFG.SITE_URL + '">youreastbay.com</a> | <a href="' + CFG.MAIN_SITE_URL + '">samyusufi.com</a></p>' +
+    CFG.PHONE_DISPLAY + ' | <a href="' + CFG.SITE_URL + '">whathappenstothehouse.com</a> | <a href="' + CFG.MAIN_SITE_URL + '">samyusufi.com</a></p>' +
     '<p style="font-size:12px;color:#6b7280">General information about California law, not legal or tax advice.</p></div>';
   MailApp.sendEmail({
     to: l.email,

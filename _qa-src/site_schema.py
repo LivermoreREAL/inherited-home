@@ -1,8 +1,8 @@
-# Shared site identity for youreastbay.com, used by both builds
+# Shared site identity for whathappenstothehouse.com, used by both builds
 # (_qa-src/build.py for the question pages and _guide-src/build.py for the home page).
-SITE = "https://youreastbay.com/"
+SITE = "https://whathappenstothehouse.com/"
 SITE_NAME = "What Happens to the House?"  # the name Google shows above results; change here, then rebuild both
-SITE_ALT_NAMES = ["Your East Bay", "youreastbay.com"]
+SITE_ALT_NAMES = ["What Happens to the House", "whathappenstothehouse.com"]
 
 ALAMEDA = {"@type": "AdministrativeArea", "name": "Alameda County, California"}
 CONTRA_COSTA = {"@type": "AdministrativeArea", "name": "Contra Costa County, California"}
@@ -50,7 +50,7 @@ def social_line(prefix="Follow along: "):
 
 ICON_TAGS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">'
 
-# Google Analytics 4 (property "youreastbay.com" in the "Sam Yusufi Real Estate" account).
+# Google Analytics 4 (property "whathappenstothehouse.com", moved here from the old youreastbay.com site on 2026-10-08, in the "Sam Yusufi Real Estate" account).
 # Counts page views, plus these events: generate_lead (guide form sent), text_me (sms taps),
 # call_click, email_click, guide_cta_click (a "Free guide" button that leads to the form), and guide_jump
 # (the phone button that scrolls to the form), about_click (a link to the About Sam page), and social_click (Instagram, Facebook, or LinkedIn; says which). Each tap also says where on the page it happened (placement).

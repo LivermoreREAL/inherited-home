@@ -6,7 +6,7 @@ By Sam Yusufi, Realtor(R), Associate Broker and Certified Probate & Trust Specia
 
 ## What should you do with an inherited house in the first 30 days?
 
-URL: https://youreastbay.com/what-happens-to-the-house/inherited-house-first-30-days/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/inherited-house-first-30-days/
 Topic: Getting started
 
 Short answer: Focus on protecting the house, not selling it. Secure it, photograph every room, tell the insurance company it may be vacant, and keep the utilities and bills current. Gather the paperwork, hold off on belongings until someone has legal authority, and talk to an attorney before signing anything.
@@ -28,7 +28,7 @@ And here's why it matters: a well-cared-for house protects the value of the esta
 
 ## Does an inherited house have to go through probate in California?
 
-URL: https://youreastbay.com/what-happens-to-the-house/does-inherited-house-go-through-probate/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/does-inherited-house-go-through-probate/
 Topic: Getting started
 
 Short answer: Not always. It depends on how the home was owned. A home in a living trust, in joint tenancy with a surviving owner, or with a transfer-on-death deed usually passes without probate. A home in the person's name alone, with no trust, usually goes through probate, though some smaller estates and surviving spouses can use simpler procedures.
@@ -60,7 +60,7 @@ Official source: California Courts, when formal probate may not be needed
 
 ## What are the most common mistakes when selling an inherited house?
 
-URL: https://youreastbay.com/what-happens-to-the-house/common-mistakes-inherited-house/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/common-mistakes-inherited-house/
 Topic: Getting started
 
 Short answer: Most come from honest assumptions: thinking a will avoids probate, assuming the house is in the trust, acting before anyone has authority, debating price before agreeing on a process, clearing out belongings too quickly, renovating without a plan, and learning about Prop 19 too late.
@@ -87,7 +87,7 @@ Learning about Prop 19 too late: If anyone might keep the house, talk to a CPA a
 
 ## Who has the authority to sell a house in probate?
 
-URL: https://youreastbay.com/what-happens-to-the-house/who-can-sell-house-in-probate/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/who-can-sell-house-in-probate/
 Topic: If the home is in probate
 
 Short answer: Only the Personal Representative the court appoints: the executor if there's a will, or the administrator if there isn't. They can't sell until the court issues Letters, and the Letters say whether they have full or limited authority. Being the closest relative doesn't give someone authority on its own.
@@ -108,7 +108,7 @@ Being next of kin isn't the same as having authority. A spouse, child, or siblin
 
 ## What's the difference between full and limited authority in probate?
 
-URL: https://youreastbay.com/what-happens-to-the-house/full-vs-limited-authority/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/full-vs-limited-authority/
 Topic: If the home is in probate
 
 Short answer: It's the level of power the court gives the Personal Representative. With full authority under California's Independent Administration of Estates Act (IAEA), they can sell the house without a court hearing, after giving heirs 15 days' written notice. With limited authority, the sale needs a court confirmation hearing, where other buyers can overbid.
@@ -135,7 +135,7 @@ Even with full authority, the Personal Representative sends a Notice of Proposed
 
 ## What is a Notice of Proposed Action in a probate sale?
 
-URL: https://youreastbay.com/what-happens-to-the-house/notice-of-proposed-action/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/notice-of-proposed-action/
 Topic: If the home is in probate
 
 Short answer: A Notice of Proposed Action (NOPA) is a formal written notice the Personal Representative sends to every heir and interested party before selling under full authority. If no one objects within 15 days, the sale moves forward without a court hearing. If someone does object, the sale goes to the court for approval.
@@ -155,7 +155,7 @@ Where families get tripped up
 
 ## How do overbids work in a California probate sale?
 
-URL: https://youreastbay.com/what-happens-to-the-house/probate-overbids/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/probate-overbids/
 Topic: If the home is in probate
 
 Short answer: When a probate sale needs court confirmation, the accepted offer isn't final until a court hearing. At that hearing, other buyers can bid more. The first overbid must be at least the accepted price, plus 10% of the first $10,000, plus 5% of the rest. On an $800,000 offer, that's $840,500.
@@ -188,7 +188,7 @@ A court-confirmed sale adds a hearing date and a bidding step to the timeline. H
 
 ## How long does probate take in California?
 
-URL: https://youreastbay.com/what-happens-to-the-house/how-long-does-probate-take/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/how-long-does-probate-take/
 Topic: If the home is in probate
 
 Short answer: Many California probates take 9 to 18 months, and some take longer. The good news: the house can usually be sold before the estate closes, once the Personal Representative has Letters and the authority to sell.
@@ -219,7 +219,7 @@ Official source: California Courts, how formal probate works
 
 ## How do you sell a house held in a trust in California?
 
-URL: https://youreastbay.com/what-happens-to-the-house/selling-house-in-a-trust/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/selling-house-in-a-trust/
 Topic: If the home is in a trust
 
 Short answer: The successor trustee named in the trust usually sells it without going to court. Before listing, the trustee needs proof of authority in place, often a Certification of Trust, and must follow the trust's terms. California also requires the trustee to notify beneficiaries and heirs within 60 days after the trust becomes irrevocable.
@@ -257,7 +257,7 @@ What still needs care
 
 ## Should you sell an inherited house as-is or fix it up first?
 
-URL: https://youreastbay.com/what-happens-to-the-house/sell-inherited-house-as-is-or-fix-up/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/sell-inherited-house-as-is-or-fix-up/
 Topic: Preparing and selling
 
 Short answer: It depends on the house and the family's goals. Selling as-is is the simplest option and common in probate. Light preparation, like a clean-out, paint, yard cleanup, and small repairs, is often the best balance of cost and return. Bigger updates can raise the price but take time and estate money, so find out what buyers would pay first.
@@ -291,7 +291,7 @@ Sales by a Personal Representative or trustee are often exempt from California's
 
 ## Who do you need on your team to settle an inherited house?
 
-URL: https://youreastbay.com/what-happens-to-the-house/whos-on-your-team/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/whos-on-your-team/
 Topic: Preparing and selling
 
 Short answer: Usually a small team: an estate attorney for legal authority and court steps, a CPA for taxes, title and escrow to confirm ownership and close the sale, an insurance agent to keep the home covered, and a real estate agent for value, preparation, and the sale. In probate, the court also appoints a probate referee to appraise the property.
@@ -320,7 +320,7 @@ When everyone knows their role, the house doesn't get stuck waiting on the wrong
 
 ## Do you pay capital gains tax when you sell an inherited house?
 
-URL: https://youreastbay.com/what-happens-to-the-house/inherited-house-capital-gains/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/inherited-house-capital-gains/
 Topic: Taxes
 
 Short answer: Often little or none, if you sell soon after inheriting. Inherited property usually gets a stepped-up basis, meaning its value for tax purposes resets to what it was worth on the date of death. Capital gains are then figured from that value, not from what the original owner paid. Confirm the details with a CPA.
@@ -343,7 +343,7 @@ If anyone in the family is thinking about keeping the house instead, ask about P
 
 ## Does Prop 19 apply to an inherited home in California?
 
-URL: https://youreastbay.com/what-happens-to-the-house/prop-19-inherited-home/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/prop-19-inherited-home/
 Topic: Taxes
 
 Short answer: Yes, for inheritances since February 2021. A child who inherits a parent's home keeps the parent's property tax base only if they make it their own primary residence within one year, and only up to the parent's taxable value plus $1,044,586 (for transfers from February 16, 2025 to February 15, 2027). Otherwise, the home is reassessed at today's market value, which can mean a much higher tax bill.
@@ -367,7 +367,7 @@ Run your own numbers: the free Prop 19 Calculator shows the property tax bill wi
 
 ## What if siblings disagree about selling an inherited house?
 
-URL: https://youreastbay.com/what-happens-to-the-house/siblings-disagree-inherited-house/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/siblings-disagree-inherited-house/
 Topic: Family
 
 Short answer: It's common, and it doesn't mean your family is doing it wrong. Agree on the process before debating price, work from the same written opinion of value, share information with everyone at the same time, and let the estate attorney guide real disputes. If someone lives in the house or wants to buy out the others, talk to the attorney early.
@@ -394,7 +394,7 @@ When you don't agree
 
 ## Probate and trust terms, explained
 
-URL: https://youreastbay.com/what-happens-to-the-house/probate-trust-glossary/
+URL: https://whathappenstothehouse.com/what-happens-to-the-house/probate-trust-glossary/
 Topic: Reference
 
 Short answer: The words you'll hear most when a home is in probate or a trust, and what they mean. You're not expected to know them. Here they are, one at a time.
