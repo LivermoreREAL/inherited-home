@@ -17,6 +17,7 @@ var CFG = {
   TAB: 'Leads',
   GUIDE_URL: 'https://youreastbay.com/What-Happens-to-the-House.pdf',
   SITE_URL: 'https://youreastbay.com/',
+  MAIN_SITE_URL: 'https://samyusufi.com/',
   PHONE_DISPLAY: '925.425.8929',
   PHONE_TEL: '+19254258929',
   MIN_FILL_MS: 1200,     // forms sent faster than this are bots
@@ -206,12 +207,12 @@ function thankYou_(l, cache) {
     '',
     "It covers who's in charge, what to do first, and how a probate or trust sale works. You don't have to read it all at once.",
     '',
-    "If you'd like to talk it through, reply to this email, or call or text me at " + CFG.PHONE_DISPLAY + '. No pressure, no obligation.',
+    "If you'd like to talk it through, reply to this email, or call or text me at " + CFG.PHONE_DISPLAY + '.',
     '',
     'Sam Yusufi, Realtor®',
     'Certified Probate & Trust Specialist',
     'Legacy Real Estate & Associates | DRE# 02020587',
-    CFG.PHONE_DISPLAY + ' | youreastbay.com',
+    CFG.PHONE_DISPLAY + ' | youreastbay.com | samyusufi.com',
     '',
     'General information about California law, not legal or tax advice.'
   ].join('\n');
@@ -220,9 +221,9 @@ function thankYou_(l, cache) {
     '<p>I appreciate you reaching out. Here is your free guide, <b>What Happens to the House?</b></p>' +
     '<p><a href="' + CFG.GUIDE_URL + '" style="display:inline-block;background:#b48b1b;color:#ffffff;text-decoration:none;font-weight:bold;padding:12px 20px;border-radius:8px">Download the Guide (PDF)</a></p>' +
     "<p>It covers who's in charge, what to do first, and how a probate or trust sale works. You don't have to read it all at once.</p>" +
-    '<p>If you\'d like to talk it through, reply to this email, or call or text me at <a href="tel:' + CFG.PHONE_TEL + '">' + CFG.PHONE_DISPLAY + '</a>. No pressure, no obligation.</p>' +
+    '<p>If you\'d like to talk it through, reply to this email, or call or text me at <a href="tel:' + CFG.PHONE_TEL + '">' + CFG.PHONE_DISPLAY + '</a>.</p>' +
     '<p style="margin-top:22px">Sam Yusufi, Realtor&reg;<br>Certified Probate &amp; Trust Specialist<br>Legacy Real Estate &amp; Associates | DRE# 02020587<br>' +
-    CFG.PHONE_DISPLAY + ' | <a href="' + CFG.SITE_URL + '">youreastbay.com</a></p>' +
+    CFG.PHONE_DISPLAY + ' | <a href="' + CFG.SITE_URL + '">youreastbay.com</a> | <a href="' + CFG.MAIN_SITE_URL + '">samyusufi.com</a></p>' +
     '<p style="font-size:12px;color:#6b7280">General information about California law, not legal or tax advice.</p></div>';
   MailApp.sendEmail({
     to: l.email,
