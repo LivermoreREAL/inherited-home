@@ -142,3 +142,12 @@ dl.g dd{color:#34405a;font-size:16px}
 @media (min-width:700px){.meet{flex-direction:row;text-align:left;align-items:center;gap:28px;padding:30px 32px}.meet .mt{flex:1}.meet img{width:160px;height:160px}}
 .fcon{font-size:14px}.fcon a{font-size:15px}
 .soc{font-size:14px;color:#34405a}.soc a{font-weight:600}
+
+/* social icons on the About Sam contact card */
+.meet .socials{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px}
+.meet .si{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--navy);background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;text-decoration:none}
+.meet .si svg{width:22px;height:22px;fill:currentColor}
+.meet .si:hover{background:var(--navy);color:#fff}
+.meet .sh{font-size:16px;font-weight:700;color:var(--navy);text-decoration:none;margin-left:4px}
+.meet .sh:hover{text-decoration:underline}
+@media (min-width:700px){.meet .socials{justify-content:flex-start}}

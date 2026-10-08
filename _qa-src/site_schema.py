@@ -35,6 +35,15 @@ SOCIAL_HANDLE = "@samyusufi7"
 INSTAGRAM = "https://www.instagram.com/samyusufi7/"
 FACEBOOK = "https://www.facebook.com/samyusufi7/"
 LINKEDIN = "https://www.linkedin.com/in/yusufi/"
+# Round icon buttons (Instagram, Facebook, LinkedIn) with the handle beside them; used on the About Sam contact card.
+def social_icons():
+    ig = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 2A2.5 2.5 0 0 0 5 7.5v9A2.5 2.5 0 0 0 7.5 19h9a2.5 2.5 0 0 0 2.5-2.5v-9A2.5 2.5 0 0 0 16.5 5h-9ZM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5-3.2a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>'
+    fb = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.8v8h3.2Z"/></svg>'
+    li = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.3" cy="6.4" r="1.9"/><rect x="4.6" y="9.2" width="3.4" height="10.2" rx=".4"/><path d="M10.2 9.2h3.2v1.4c.6-1 1.7-1.7 3.3-1.7 3 0 3.8 2 3.8 4.7v5.8h-3.4v-5.1c0-1.3-.1-2.6-1.6-2.6s-1.9 1.2-1.9 2.5v5.2h-3.4V9.2Z"/></svg>'
+    a = lambda u, label, icon: f'<a class="si" href="{u}" target="_blank" rel="me noopener" aria-label="{label}">{icon}</a>'
+    return (f'<div class="socials">{a(INSTAGRAM, "Instagram: " + SOCIAL_HANDLE, ig)}{a(FACEBOOK, "Facebook: " + SOCIAL_HANDLE, fb)}{a(LINKEDIN, "LinkedIn: Sam Yusufi", li)}'
+            f'<a class="sh" href="{INSTAGRAM}" target="_blank" rel="me noopener">{SOCIAL_HANDLE}</a></div>')
+
 def social_line(prefix="Follow along: "):
     a = lambda u, t: f'<a href="{u}" target="_blank" rel="me noopener">{t}</a>'
     return f'{prefix}{SOCIAL_HANDLE} on {a(INSTAGRAM, "Instagram")} and {a(FACEBOOK, "Facebook")}, or connect on {a(LINKEDIN, "LinkedIn")}.'

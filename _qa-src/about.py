@@ -7,7 +7,7 @@ URL_PATH = "about-sam/"
 def build_about(g):
     SITE, BASE = g["SITE"], g["BASE"]
     esc, head, cta, foot, PERSON, SMS = g["esc"], g["head"], g["cta"], g["foot"], g["PERSON"], g["SMS"]
-    from site_schema import PHONE_TEL, PHONE_DISPLAY, EMAIL, PHONE_ICON, CITY_LIST, social_line
+    from site_schema import PHONE_TEL, PHONE_DISPLAY, EMAIL, PHONE_ICON, CITY_LIST, social_line, social_icons
     UPDATED_ISO = g["SITE_REFRESH_ISO"]
     url = SITE + URL_PATH
     rel = "/what-happens-to-the-house/"
@@ -37,6 +37,7 @@ def build_about(g):
       <p>Legacy Real Estate &amp; Associates<br>1983 Second St, Livermore, CA 94550</p>
       <a class="mph" href="{PHONE_TEL}">{PHONE_ICON}{PHONE_DISPLAY}</a>
       <div class="mbt"><a class="m1" href="{PHONE_TEL}">Call</a><a class="m2" href="{SMS}">Text</a><a class="m2" href="mailto:{EMAIL}">Email</a></div>
+      {social_icons()}
     </div>
   </section>
 
