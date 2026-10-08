@@ -22,6 +22,7 @@ document.addEventListener('click',function(e){
   }
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
   else if(h==='#guide')gtag('event','guide_jump',p);
+  else if(h==='/about-sam/')gtag('event','about_click',p);
 });
 </script>
 <title>Inherited a Home in the East Bay? Free Guide | Sam Yusufi, CPTS</title>
@@ -88,7 +89,15 @@ document.addEventListener('click',function(e){
    "email": "sam@samyusufi.com",
    "worksFor": {
     "@type": "RealEstateAgent",
-    "name": "Legacy Real Estate & Associates"
+    "name": "Legacy Real Estate & Associates",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "1983 Second St",
+     "addressLocality": "Livermore",
+     "addressRegion": "CA",
+     "postalCode": "94550",
+     "addressCountry": "US"
+    }
    },
    "hasCredential": [
     {
@@ -360,6 +369,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .ag .ac a:hover{text-decoration:underline}
 .ag .ac a.ph{font-size:25px;font-weight:700}
 .ag .area{font-size:15px}
+.ag .more{display:inline-block;margin-top:10px;font-size:16px;font-weight:600;color:var(--navy)}
 
 .gd{display:flex;gap:18px;align-items:center;background:var(--cream);margin:22px 22px 0;padding:18px;border-radius:14px}
 .gd img{width:104px;height:auto;border-radius:4px;box-shadow:0 6px 16px rgba(0,29,73,.25);flex-shrink:0}
@@ -517,6 +527,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);bo
         <a href="https://samyusufi.com" target="_blank" rel="noopener">samyusufi.com</a>
       </div>
       <div class="rl area">Serving Alameda &amp; Contra Costa&nbsp;Counties</div>
+      <a class="more" href="/about-sam/">More about Sam &rarr;</a>
     </div>
   </div>
 

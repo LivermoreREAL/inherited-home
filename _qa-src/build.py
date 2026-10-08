@@ -55,7 +55,7 @@ def head(title, desc, url, rel, ogtype, ld, noindex=False, og=None):
 <header class="top"><div class="in"><a class="brand sf" href="{rel or './'}">What Happens to the House?</a><a class="tcall" href="{PHONE_TEL}">{PHONE_ICON}<span class="tl">Call or text&nbsp;</span><span class="tn">{PHONE_DISPLAY}</span><span class="tm">Call</span></a><a class="tbtn" href="{LANDING}">Free guide</a></div></header>
 """
 
-def cta(rel):
+def cta(rel, meet_card=True):
     return f"""<section class="cta">
   <div class="t sf">Get the full guide, free</div>
   <p>15 printable pages on probate, trusts, taxes, and selling an inherited home in California, with a checklist.</p>
@@ -63,7 +63,7 @@ def cta(rel):
   <a class="o" href="{SMS}">Text Me</a>
   <p class="n">A no-pressure conversation, whenever you're ready.</p>
 </section>
-{meet(rel)}"""
+{meet(rel) if meet_card else ""}"""
 
 def foot(rel):
     return f"""<footer class="ft">
@@ -73,7 +73,7 @@ def foot(rel):
   Legacy Real Estate &amp; Associates<br>
   <span class="fcon">Call or text <a href="{PHONE_TEL}">{PHONE_DISPLAY}</a> &middot; <a href="mailto:{EMAIL}">{EMAIL}</a></span><br>
   <span class="area">{SERVING}</span><br>
-  <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
+  <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="/about-sam/">About Sam</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
   <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. {esc(PRIVACY_NOTE)}</p>
 </footer>
@@ -98,7 +98,7 @@ def meet(rel):
 </section>"""
 
 def byline(rel):
-    return f"""<div class="by"><img src="{rel}assets/headshot.jpg" alt="Sam Yusufi" width="36" height="36"><span>By <a href="{rel or './'}#about">Sam Yusufi</a>, Certified Probate &amp; Trust Specialist<br>Updated <time datetime="{UPDATED_ISO}">{UPDATED}</time></span></div>"""
+    return f"""<div class="by"><img src="{rel}assets/headshot.jpg" alt="Sam Yusufi" width="36" height="36"><span>By <a href="/about-sam/">Sam Yusufi</a>, Certified Probate &amp; Trust Specialist<br>Updated <time datetime="{UPDATED_ISO}">{UPDATED}</time></span></div>"""
 
 def build_page(p):
     rel = "../"; url = BASE + p["slug"] + "/"
@@ -166,7 +166,7 @@ def build_home():
 <main class="wrap">
   <div class="ag" id="about">
     <img src="assets/headshot.jpg" alt="Sam Yusufi" width="64" height="64">
-    <div><div class="nm sf">Sam Yusufi, Realtor&reg;</div><div class="rl">Certified Probate &amp; Trust Specialist</div><div class="rl">DRE#&nbsp;02020587 &middot; Legacy Real Estate &amp; Associates</div></div>
+    <div><div class="nm sf">Sam Yusufi, Realtor&reg;</div><div class="rl">Certified Probate &amp; Trust Specialist</div><div class="rl">DRE#&nbsp;02020587 &middot; Legacy Real Estate &amp; Associates</div><div class="rl"><a href="/about-sam/">More about Sam &rarr;</a></div></div>
   </div>
   <p class="lede">Someone you love has passed, and a house is part of what they left behind. Start with the question you're facing today. Each answer takes a few minutes to read.</p>
   <div class="groups">
@@ -252,7 +252,7 @@ def to_text(h):
     return "\n".join(tight).strip()
 
 def build_meta():
-    urls = [SITE, BASE, SITE + "prop19-calculator/"] + [BASE + p["slug"] + "/" for p in PAGES]
+    urls = [SITE, BASE, SITE + "about-sam/", SITE + "prop19-calculator/"] + [BASE + p["slug"] + "/" for p in PAGES]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sm += "".join(f"  <url><loc>{u}</loc><lastmod>{SITE_REFRESH_ISO}</lastmod></url>\n" for u in urls) + "</urlset>\n"
     open(os.path.join(SITE_ROOT, "sitemap.xml"), "w").write(sm)
@@ -272,7 +272,7 @@ Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rate
 
 ## About the author
 
-Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management. She serves families in English, Farsi, Dari, and Hindi. LinkedIn: https://www.linkedin.com/in/yusufi/
+Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management. She serves families in English, Farsi, Dari, and Hindi. Full profile: {SITE}about-sam/ . LinkedIn: https://www.linkedin.com/in/yusufi/
 
 ## How to cite
 
@@ -300,4 +300,6 @@ for p in PAGES:
 build_home(); build_404(); build_meta()
 from prop19 import build_prop19
 build_prop19(globals())
+from about import build_about
+build_about(globals())
 print(f"built {len(PAGES)} pages + home, prop19 calculator, 404.html, sitemap.xml, robots.txt, llms.txt")

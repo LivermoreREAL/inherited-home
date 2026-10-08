@@ -17,7 +17,8 @@ PERSON = {
   "@type": "Person", "@id": SITE + "#sam", "name": "Sam Yusufi",
   "jobTitle": "Realtor, Associate Broker", "url": "https://samyusufi.com",
   "image": SITE + "what-happens-to-the-house/assets/headshot.jpg", "telephone": "+1-925-425-8929", "email": "sam@samyusufi.com",
-  "worksFor": {"@type": "RealEstateAgent", "name": "Legacy Real Estate & Associates"},
+  "worksFor": {"@type": "RealEstateAgent", "name": "Legacy Real Estate & Associates",
+                "address": {"@type": "PostalAddress", "streetAddress": "1983 Second St", "addressLocality": "Livermore", "addressRegion": "CA", "postalCode": "94550", "addressCountry": "US"}},
   "hasCredential": [
     {"@type": "EducationalOccupationalCredential", "name": "Certified Probate & Trust Specialist (CPTS)", "credentialCategory": "certification"},
     {"@type": "EducationalOccupationalCredential", "name": "California Real Estate Broker License", "identifier": "DRE# 02020587", "credentialCategory": "license",
@@ -34,7 +35,7 @@ ICON_TAGS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="ico
 # Google Analytics 4 (property "youreastbay.com" in the "Sam Yusufi Real Estate" account).
 # Counts page views, plus these events: generate_lead (guide form sent), text_me (sms taps),
 # call_click, email_click, guide_cta_click (a "Free guide" button that leads to the form), and guide_jump
-# (the phone button that scrolls to the form). Each tap also says where on the page it happened (placement).
+# (the phone button that scrolls to the form), and about_click (a link to the About Sam page). Each tap also says where on the page it happened (placement).
 # No names, emails, phone numbers, or addresses are ever sent to Google.
 GA_ID = "G-CXF6CNWM21"
 ANALYTICS = f"""<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -56,6 +57,7 @@ document.addEventListener('click',function(e){{
   }}
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
   else if(h==='#guide')gtag('event','guide_jump',p);
+  else if(h==='/about-sam/')gtag('event','about_click',p);
 }});
 </script>"""
 PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me."
