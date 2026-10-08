@@ -141,3 +141,4 @@ dl.g dd{color:#34405a;font-size:16px}
 .meet .m2{border:1.5px solid var(--navy);color:var(--navy);background:#fff}
 @media (min-width:700px){.meet{flex-direction:row;text-align:left;align-items:center;gap:28px;padding:30px 32px}.meet .mt{flex:1}.meet img{width:160px;height:160px}}
 .fcon{font-size:14px}.fcon a{font-size:15px}
+.soc{font-size:14px;color:#34405a}.soc a{font-weight:600}

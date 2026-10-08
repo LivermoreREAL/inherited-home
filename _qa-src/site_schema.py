@@ -27,15 +27,24 @@ PERSON = {
   "description": "Realtor and Associate Broker (DRE# 02020587) and Certified Probate & Trust Specialist at Legacy Real Estate & Associates in Livermore, California. More than 20 years of professional experience, including over a decade in real estate and property management. Helps East Bay families sell inherited homes in probate or a trust.",
   "knowsLanguage": ["English", "Persian", "Dari", "Hindi"],
   "memberOf": [{"@type": "Organization", "name": "Bay East Association of Realtors"}, {"@type": "Organization", "name": "Valley Real Estate Network"}, {"@type": "Organization", "name": "Real Estate Alliance of Livermore"}],
-  "sameAs": ["https://www.facebook.com/samyusufibroker/", "https://www.linkedin.com/in/yusufi/", "https://www.instagram.com/samyusufi7/"],
+  "sameAs": ["https://www.instagram.com/samyusufi7/", "https://www.facebook.com/samyusufi7/", "https://www.facebook.com/samyusufibroker/", "https://www.linkedin.com/in/yusufi/"],
 }
+
+# Sam's social accounts: @samyusufi7 is the same handle on Instagram and Facebook; LinkedIn is her profile address.
+SOCIAL_HANDLE = "@samyusufi7"
+INSTAGRAM = "https://www.instagram.com/samyusufi7/"
+FACEBOOK = "https://www.facebook.com/samyusufi7/"
+LINKEDIN = "https://www.linkedin.com/in/yusufi/"
+def social_line(prefix="Follow along: "):
+    a = lambda u, t: f'<a href="{u}" target="_blank" rel="me noopener">{t}</a>'
+    return f'{prefix}{SOCIAL_HANDLE} on {a(INSTAGRAM, "Instagram")} and {a(FACEBOOK, "Facebook")}, or connect on {a(LINKEDIN, "LinkedIn")}.'
 
 ICON_TAGS = '<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">'
 
 # Google Analytics 4 (property "youreastbay.com" in the "Sam Yusufi Real Estate" account).
 # Counts page views, plus these events: generate_lead (guide form sent), text_me (sms taps),
 # call_click, email_click, guide_cta_click (a "Free guide" button that leads to the form), and guide_jump
-# (the phone button that scrolls to the form), and about_click (a link to the About Sam page). Each tap also says where on the page it happened (placement).
+# (the phone button that scrolls to the form), about_click (a link to the About Sam page), and social_click (Instagram, Facebook, or LinkedIn; says which). Each tap also says where on the page it happened (placement).
 # No names, emails, phone numbers, or addresses are ever sent to Google.
 GA_ID = "G-CXF6CNWM21"
 ANALYTICS = f"""<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -58,6 +67,7 @@ document.addEventListener('click',function(e){{
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
   else if(h==='#guide')gtag('event','guide_jump',p);
   else if(h==='/about-sam/')gtag('event','about_click',p);
+  else if(/(instagram|facebook|linkedin)\\.com/.test(h))gtag('event','social_click',{{link_location:p.link_location,placement:p.placement,network:(h.match(/instagram|facebook|linkedin/)||[''])[0],transport_type:'beacon'}});
 }});
 </script>"""
 PRIVACY_NOTE = "This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me."

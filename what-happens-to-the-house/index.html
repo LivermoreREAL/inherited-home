@@ -23,6 +23,7 @@ document.addEventListener('click',function(e){
   else if(h==='/'&&/free guide/i.test(a.textContent))gtag('event','guide_cta_click',p);
   else if(h==='#guide')gtag('event','guide_jump',p);
   else if(h==='/about-sam/')gtag('event','about_click',p);
+  else if(/(instagram|facebook|linkedin)\.com/.test(h))gtag('event','social_click',{link_location:p.link_location,placement:p.placement,network:(h.match(/instagram|facebook|linkedin/)||[''])[0],transport_type:'beacon'});
 });
 </script>
 <title>What Happens to the House? Inherited Homes in California | Sam Yusufi, CPTS</title>
@@ -219,9 +220,10 @@ document.addEventListener('click',function(e){
     }
    ],
    "sameAs": [
+    "https://www.instagram.com/samyusufi7/",
+    "https://www.facebook.com/samyusufi7/",
     "https://www.facebook.com/samyusufibroker/",
-    "https://www.linkedin.com/in/yusufi/",
-    "https://www.instagram.com/samyusufi7/"
+    "https://www.linkedin.com/in/yusufi/"
    ]
   },
   {
@@ -425,6 +427,7 @@ document.addEventListener('click',function(e){
   <span class="fcon">Call or text <a href="tel:+19254258929">925.425.8929</a> &middot; <a href="mailto:sam@samyusufi.com">sam@samyusufi.com</a></span><br>
   <span class="area">Serving families in Livermore, Pleasanton, Dublin, San Ramon, Danville, Fremont, Union City, Newark, and San Leandro, across Alameda and Contra Costa Counties.</span><br>
   <a href="./">Guide home</a> &middot; <a href="/">Free guide</a> &middot; <a href="/about-sam/">About Sam</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
+  <span class="soc">Follow along: @samyusufi7 on <a href="https://www.instagram.com/samyusufi7/" target="_blank" rel="me noopener">Instagram</a> and <a href="https://www.facebook.com/samyusufi7/" target="_blank" rel="me noopener">Facebook</a>, or connect on <a href="https://www.linkedin.com/in/yusufi/" target="_blank" rel="me noopener">LinkedIn</a>.</span><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
   <p class="fine">General educational information about California law, current as of September 2026. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. This site uses Google Analytics cookies to count visits and see which pages are read. What you type in the form goes only to me.</p>
 </footer>

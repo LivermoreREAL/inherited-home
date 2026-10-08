@@ -16,7 +16,7 @@ ROOT = os.path.join(SITE_ROOT, "what-happens-to-the-house")
 BY = {p["slug"]: p for p in PAGES}
 esc = lambda s: html.escape(s, quote=True)
 
-from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE, PHONE_DISPLAY, PHONE_TEL, EMAIL, PHONE_ICON, CONTACT_CSS_RAW, contact_bar, CONTACT_JS  # shared with the home page build
+from site_schema import SITE_NAME, PERSON, ICON_TAGS, SERVING, CITY_LIST, ANALYTICS, PRIVACY_NOTE, PHONE_DISPLAY, PHONE_TEL, EMAIL, PHONE_ICON, CONTACT_CSS_RAW, contact_bar, CONTACT_JS, social_line  # shared with the home page build
 
 def head(title, desc, url, rel, ogtype, ld, noindex=False, og=None):
     index_tag = '<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{url}">'
@@ -74,6 +74,7 @@ def foot(rel):
   <span class="fcon">Call or text <a href="{PHONE_TEL}">{PHONE_DISPLAY}</a> &middot; <a href="mailto:{EMAIL}">{EMAIL}</a></span><br>
   <span class="area">{SERVING}</span><br>
   <a href="{rel or './'}">Guide home</a> &middot; <a href="{LANDING}">Free guide</a> &middot; <a href="/about-sam/">About Sam</a> &middot; <a href="https://samyusufi.com">samyusufi.com</a><br>
+  <span class="soc">{social_line()}</span><br>
   <span class="eho"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2 1 11h3v11h16V11h3L12 2Zm4 16H8v-2h8v2Zm0-4H8v-2h8v2Z" fill="#5a6478"/></svg> Equal Housing Opportunity</span>
   <p class="fine">General educational information about California law, current as of {UPDATED}. It is not legal, tax, or financial advice, and reading it doesn't create a professional relationship. Please consult the estate's attorney and CPA about your situation. If your property is currently listed for sale, this is not intended as a solicitation of that listing. {esc(PRIVACY_NOTE)}</p>
 </footer>
@@ -272,7 +273,7 @@ Prop 19 calculator (inherited homes and 55+ moves, with {P19.RATE_YEAR} tax rate
 
 ## About the author
 
-Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management. She serves families in English, Farsi, Dari, and Hindi. Full profile: {SITE}about-sam/ . LinkedIn: https://www.linkedin.com/in/yusufi/
+Sam Yusufi, Realtor(R), is a California real estate broker (DRE# 02020587) with Legacy Real Estate & Associates in Livermore and a Certified Probate & Trust Specialist (CPTS). She has more than 20 years of professional experience, including over a decade in real estate and property management. She serves families in English, Farsi, Dari, and Hindi. Full profile: {SITE}about-sam/ . Instagram and Facebook: @samyusufi7 (https://www.instagram.com/samyusufi7/ and https://www.facebook.com/samyusufi7/). LinkedIn: https://www.linkedin.com/in/yusufi/
 
 ## How to cite
 

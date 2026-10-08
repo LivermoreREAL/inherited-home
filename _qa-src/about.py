@@ -7,7 +7,7 @@ URL_PATH = "about-sam/"
 def build_about(g):
     SITE, BASE = g["SITE"], g["BASE"]
     esc, head, cta, foot, PERSON, SMS = g["esc"], g["head"], g["cta"], g["foot"], g["PERSON"], g["SMS"]
-    from site_schema import PHONE_TEL, PHONE_DISPLAY, EMAIL, PHONE_ICON, CITY_LIST
+    from site_schema import PHONE_TEL, PHONE_DISPLAY, EMAIL, PHONE_ICON, CITY_LIST, social_line
     UPDATED_ISO = g["SITE_REFRESH_ISO"]
     url = SITE + URL_PATH
     rel = "/what-happens-to-the-house/"
@@ -61,6 +61,7 @@ def build_about(g):
       <tr><td>License</td><td>California Real Estate Broker, DRE#&nbsp;02020587</td></tr>
       <tr><td>Brokerage</td><td>Legacy Real Estate &amp; Associates, Livermore</td></tr>
       <tr><td>Languages</td><td>Fluent in English, Farsi, Dari, and Hindi</td></tr>
+      <tr><td>Follow along</td><td>{social_line("")}</td></tr>
       <tr><td>Where I work</td><td>{esc(CITY_LIST)}, across Alameda and Contra Costa Counties</td></tr>
     </table>
   </article>
