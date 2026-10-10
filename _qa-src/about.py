@@ -16,7 +16,7 @@ def build_about(g):
             "who helps East Bay families sell an inherited home in probate or a trust.")
     graph = [
       {"@type": "ProfilePage", "@id": url + "#page", "url": url, "name": title, "description": desc, "inLanguage": "en-US",
-       "isPartOf": {"@id": SITE + "#website"}, "mainEntity": {"@id": SITE + "#sam"}, "dateModified": UPDATED_ISO,
+       "isPartOf": {"@id": SITE + "#website"}, "mainEntity": {"@id": SITE + "#sam"}, "dateModified": UPDATED_ISO + "T00:00:00-07:00",
        "primaryImageOfPage": BASE + "assets/headshot.jpg"},
       PERSON,
       {"@type": "BreadcrumbList", "itemListElement": [
